@@ -3,21 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nuestra Boda - Keila & Jorge</title>
-  
-  <!-- Fuentes Elegantes -->
+  <title>Boda Keila & Jorge - Bienvenida</title>
+
+  <!-- Fuentes tipográficas para imitar perfectamente Google Sites -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --verde-salvia: #9B9A79;
-      --verde-oscuro: #4F5535;
-      --terracota: #B86F4A;
-      --crema-cal: #F8F6F0;
-      --texto-oscuro: #2C2C2C;
-      --blanco: #FFFFFF;
+      --verde-monograma: #4B5A3B;
+      --terracota-fecha: #C57D5C;
+      --texto-oscuro: #3A3A3A;
+      --crema-fondo: #FDFBF7;
     }
 
     * {
@@ -27,43 +25,100 @@
     }
 
     body {
-      background-color: var(--crema-cal);
+      background-color: var(--crema-fondo);
       font-family: 'Montserrat', sans-serif;
       color: var(--texto-oscuro);
       line-height: 1.6;
     }
 
-    /* Cabecera / Hero */
-    header {
+    /* ENCABEZADO HERO (BANNER DE GOOGLE SITES) */
+    .hero-banner {
+      position: relative;
+      width: 100%;
+      min-height: 520px;
+      background-image: url('./banner.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 60px 20px 30px;
+      padding: 40px 20px;
     }
 
-    header h1 {
+    /* Contenedor del texto superpuesto */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-initials {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 3rem;
-      font-weight: 400;
-      color: var(--verde-oscuro);
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--verde-salvia);
+      font-size: 3.8rem;
       font-weight: 500;
+      color: var(--verde-monograma);
+      letter-spacing: 4px;
+      line-height: 1;
+      margin-bottom: 8px;
     }
 
-    /* Layout Dividido (Carrusel + Texto) */
+    .hero-date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--terracota-fecha);
+      letter-spacing: 5px;
+      margin-bottom: 22px;
+    }
+
+    .hero-location-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 2.8rem;
+      font-weight: 500;
+      color: var(--verde-monograma);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .hero-location-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 4px;
+      color: var(--texto-oscuro);
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .hero-divider {
+      font-size: 1.1rem;
+      color: var(--terracota-fecha);
+      margin-bottom: 12px;
+      font-weight: 300;
+    }
+
+    .hero-tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: var(--texto-oscuro);
+      text-transform: uppercase;
+    }
+
+    /* SECCIÓN DIVIDIDA (CARRUSEL + HISTORIA) */
     .split-section {
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: center;
       max-width: 1100px;
-      margin: 40px auto 80px;
+      margin: 60px auto 80px;
       padding: 0 20px;
       gap: 50px;
     }
@@ -72,11 +127,11 @@
     .carousel-container {
       position: relative;
       width: 100%;
-      max-width: 480px;
-      height: 520px;
-      border-radius: 12px;
+      max-width: 460px;
+      height: 480px;
+      border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
       flex-shrink: 0;
     }
 
@@ -103,49 +158,64 @@
 
     .text-container h2 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.5rem;
-      color: var(--verde-oscuro);
-      margin-bottom: 20px;
+      font-size: 2.4rem;
+      color: var(--verde-monograma);
+      margin-bottom: 18px;
       font-weight: 600;
     }
 
     .text-container p {
       font-size: 0.95rem;
       color: #4A4A4A;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       font-weight: 300;
       line-height: 1.8;
     }
 
     .highlight-box {
       margin-top: 25px;
-      padding: 20px;
-      background-color: rgba(155, 154, 121, 0.12);
-      border-left: 3px solid var(--verde-salvia);
-      border-radius: 0 8px 8px 0;
+      padding: 18px 22px;
+      background-color: rgba(75, 90, 59, 0.08);
+      border-left: 3px solid var(--verde-monograma);
+      border-radius: 0 6px 6px 0;
     }
 
     .highlight-box p {
       margin-bottom: 0;
       font-style: italic;
-      color: var(--verde-oscuro);
+      color: var(--verde-monograma);
+      font-size: 0.9rem;
     }
 
-    /* Adaptación para Celulares y Tablets */
-    @media (max-width: 850px) {
-      header h1 {
-        font-size: 2.3rem;
+    /* ADAPTACIÓN PARA MÓVILES */
+    @media (max-width: 768px) {
+      .hero-banner {
+        min-height: 440px;
+        padding: 30px 15px;
+      }
+
+      .hero-initials {
+        font-size: 3rem;
+      }
+
+      .hero-date {
+        font-size: 0.95rem;
+        letter-spacing: 3px;
+      }
+
+      .hero-location-title {
+        font-size: 2.2rem;
       }
 
       .split-section {
         flex-direction: column;
-        margin: 20px auto 60px;
+        margin: 40px auto;
         gap: 30px;
       }
 
       .carousel-container {
         max-width: 100%;
-        height: 380px;
+        height: 350px;
       }
 
       .text-container {
@@ -154,29 +224,35 @@
 
       .highlight-box {
         border-left: none;
-        border-top: 3px solid var(--verde-salvia);
-        border-radius: 0 0 8px 8px;
+        border-top: 3px solid var(--verde-monograma);
+        border-radius: 0 0 6px 6px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Encabezado -->
-  <header>
-    <p>Bienvenidos a la Boda de</p>
-    <h1>Keila &amp; Jorge</h1>
+  <!-- BANNER ENCABEZADO DE GOOGLE SITES -->
+  <header class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-initials">K &amp; J</div>
+      <div class="hero-date">12 · 12 · 2026</div>
+      <div class="hero-location-title">Barichara</div>
+      <div class="hero-location-subtitle">SANTANDER · COLOMBIA</div>
+      <div class="hero-divider">|</div>
+      <div class="hero-tagline">NOS VEMOS EN BARICHARA</div>
+    </div>
   </header>
 
-  <!-- Sección Dividida: Carrusel + Historia -->
+  <!-- SECCIÓN HISTORIA CON CARRUSEL DE IMÁGENES -->
   <main class="split-section">
     
-    <!-- Columna Izquierda: Carrusel de Fotos -->
+    <!-- Columna Izquierda: Carrusel desvanecible -->
     <div class="carousel-container">
-      <!-- Reemplaza los 'src' con los nombres de tus archivos de foto subidos al repositorio -->
-      <img src="./tarjeta.png" class="carousel-slide active" alt="Keila y Jorge - Foto 1">
-      <img src="./papel.png" class="carousel-slide" alt="Keila y Jorge - Foto 2">
-      <img src="./sello.png" class="carousel-slide" alt="Keila y Jorge - Foto 3">
+      <!-- Cambia estos nombres de imagen por tus fotos subidas a GitHub -->
+      <img src="./tarjeta.png" class="carousel-slide active" alt="Foto 1">
+      <img src="./papel.png" class="carousel-slide" alt="Foto 2">
+      <img src="./sello.png" class="carousel-slide" alt="Foto 3">
     </div>
 
     <!-- Columna Derecha: Texto Informativo -->
@@ -196,7 +272,7 @@
 
   </main>
 
-  <!-- Script para la Transición Automática del Carrusel -->
+  <!-- Script de Animación para el Carrusel -->
   <script>
     let currentSlide = 0;
     const slides = document.querySelectorAll('.carousel-slide');
@@ -208,7 +284,7 @@
       slides[currentSlide].classList.add('active');
     }
 
-    // Cambia la imagen cada 4 segundos (4000ms)
+    // Cambia la imagen cada 4 segundos
     setInterval(nextSlide, 4000);
   </script>
 
