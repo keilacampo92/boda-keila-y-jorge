@@ -47,7 +47,7 @@
       cursor: pointer;
       box-shadow: 0 30px 60px rgba(0,0,0,0.35);
       transform-style: preserve-3d;
-      background-color: #7d7c60;
+      background-color: #8c8b6d;
     }
 
     /* Tarjeta Interior */
@@ -120,7 +120,7 @@
       text-transform: uppercase;
     }
 
-    /* Base de Papel */
+    /* Textura de Papel Real */
     .paper-real {
       background-color: var(--verde-salvia);
       background-image: url('./papel.png');
@@ -128,7 +128,7 @@
       background-position: center;
     }
 
-    /* SOLAPAS 3D CON LUZ Y BISEL */
+    /* SOLAPAS 3D CON LUZ Y SOMBRA */
     .flap {
       position: absolute;
       width: 100%;
@@ -138,14 +138,12 @@
       backface-visibility: hidden;
     }
 
-    /* Degradados de luz direccional para simular pliegues físicos */
     .flap-left {
       top: 0; left: 0;
       z-index: 2;
       clip-path: polygon(0 0, 0 100%, 55% 50%);
       transform-origin: left center;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.15) 100%), url('./papel.png');
-      background-size: cover;
+      filter: brightness(0.95);
     }
 
     .flap-right {
@@ -153,8 +151,7 @@
       z-index: 2;
       clip-path: polygon(100% 0, 100% 100%, 45% 50%);
       transform-origin: right center;
-      background: linear-gradient(-135deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.2) 100%), url('./papel.png');
-      background-size: cover;
+      filter: brightness(0.92);
     }
 
     .flap-bottom {
@@ -162,9 +159,7 @@
       z-index: 3;
       clip-path: polygon(0 100%, 100% 100%, 50% 45%);
       transform-origin: bottom center;
-      background: linear-gradient(0deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.18) 100%), url('./papel.png');
-      background-size: cover;
-      filter: drop-shadow(0 -10px 14px rgba(0,0,0,0.45));
+      filter: brightness(0.98) drop-shadow(0 -8px 12px rgba(0,0,0,0.4));
     }
 
     .flap-top {
@@ -172,12 +167,10 @@
       z-index: 4;
       clip-path: polygon(0 0, 100% 0, 50% 55%);
       transform-origin: top center;
-      background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.1) 100%), url('./papel.png');
-      background-size: cover;
-      filter: drop-shadow(0 18px 22px rgba(0,0,0,0.6));
+      filter: brightness(1.03) drop-shadow(0 15px 20px rgba(0,0,0,0.55));
     }
 
-    /* SELLO DE CERA */
+    /* SELLO DE CERA (238px) */
     .seal-wrapper {
       position: absolute;
       top: 55%;
@@ -187,7 +180,7 @@
       height: 238px;
       z-index: 5;
       transition: transform 3.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 2.5s cubic-bezier(0.25, 1, 0.5, 1);
-      filter: drop-shadow(0 18px 28px rgba(0,0,0,0.65));
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.6));
     }
 
     .seal-wrapper img {
@@ -246,10 +239,10 @@
 
   <div class="invitation-container" id="invitation" onclick="openEnvelope()">
     
-    <div class="flap flap-left"></div>
-    <div class="flap flap-right"></div>
-    <div class="flap flap-bottom"></div>
-    <div class="flap flap-top"></div>
+    <div class="flap flap-left paper-real"></div>
+    <div class="flap flap-right paper-real"></div>
+    <div class="flap flap-bottom paper-real"></div>
+    <div class="flap flap-top paper-real"></div>
 
     <div class="seal-wrapper">
       <img src="./sello.png" alt="Sello de Cera">
