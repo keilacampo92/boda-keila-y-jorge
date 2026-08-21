@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Boda Keila & Jorge</title>
   
-  <!-- Fuentes Elegantes -->
+  <!-- Fuentes Elegantes (Incluye Cinzel para el monograma exacto de Google Sites) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --verde-monograma: #4B5A3B;
+      --verde-boton: #9B9A79;
+      --verde-boton-hover: #4B5A3B;
       --terracota-fecha: #C57D5C;
       --crema-fondo: #FDFBF7;
       --texto-oscuro: #3A3A3A;
@@ -31,7 +33,7 @@
       line-height: 1.6;
     }
 
-    /* 1. BANNER SUPERIOR PRINCIPAL / ENCABEZADO */
+    /* 1. BANNER SUPERIOR PRINCIPAL */
     .hero-banner {
       position: relative;
       width: 100%;
@@ -55,14 +57,15 @@
       align-items: center;
     }
 
+    /* Fuente Cinzel exacta para imitar el K & J de Google Sites */
     .hero-initials {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.8rem;
+      font-family: 'Cinzel', serif;
+      font-size: 3.5rem;
       font-weight: 500;
       color: var(--verde-monograma);
-      letter-spacing: 4px;
+      letter-spacing: 6px;
       line-height: 1;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
 
     .hero-date {
@@ -110,7 +113,7 @@
       text-transform: uppercase;
     }
 
-    /* 2. CARRUSEL + MENSAJE BONITO (NUESTRA HISTORIA) */
+    /* 2. CARRUSEL + MENSAJE BONITO */
     .split-section {
       display: flex;
       flex-direction: row;
@@ -184,11 +187,11 @@
       font-size: 0.9rem;
     }
 
-    /* 3. GRID DE 4 IMÁGENES CON BOTÓN/TEXTO */
+    /* 3. GRID DE 4 BOTONES CON IMAGEN Y RECTÁNGULO VERDE */
     .grid-buttons {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 25px;
       max-width: 850px;
       margin: 70px auto;
       padding: 0 20px;
@@ -199,32 +202,43 @@
       flex-direction: column;
       align-items: center;
       text-decoration: none;
-      color: var(--verde-monograma);
       transition: transform 0.3s ease;
     }
 
     .btn-item img {
-      width: 120px;
-      height: 120px;
+      width: 110px;
+      height: 110px;
       object-fit: cover;
       border-radius: 50%;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       border: 2px solid var(--verde-monograma);
       box-shadow: 0 6px 15px rgba(0,0,0,0.08);
     }
 
-    .btn-item span {
+    /* Botón Rectangular Estético */
+    .btn-style {
+      display: inline-block;
+      padding: 9px 18px;
+      background-color: var(--verde-boton);
+      color: #FFFFFF;
+      font-size: 0.75rem;
       font-weight: 500;
       letter-spacing: 1.5px;
-      font-size: 0.8rem;
       text-transform: uppercase;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-align: center;
+      text-decoration: none;
     }
 
-    .btn-item:hover {
-      transform: translateY(-5px);
+    .btn-item:hover .btn-style,
+    .btn-style:hover {
+      background-color: var(--verde-boton-hover);
+      transform: translateY(-2px);
     }
 
-    /* 4. SECCIÓN PLANNING (SOLO LA IMAGEN) */
+    /* 4. SECCIÓN PLANNING */
     .planning-section {
       max-width: 900px;
       margin: 60px auto;
@@ -239,12 +253,15 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     }
 
-    /* 5. CONTEO REGRESIVO */
+    /* 5. CONTEO REGRESIVO + BOTÓN ASISTENCIA */
     .countdown-section {
       text-align: center;
       padding: 70px 20px;
       background: rgba(75, 90, 59, 0.05);
       margin-top: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .countdown-section h3 {
@@ -259,6 +276,7 @@
       display: flex;
       justify-content: center;
       gap: 35px;
+      margin-bottom: 45px;
     }
 
     .time-block {
@@ -283,10 +301,16 @@
       color: var(--texto-oscuro);
     }
 
+    .btn-confirm {
+      padding: 14px 32px;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+    }
+
     /* RESPONSIVO MÓVILES */
     @media (max-width: 768px) {
       .hero-banner { min-height: 440px; }
-      .hero-initials { font-size: 3rem; }
+      .hero-initials { font-size: 2.8rem; }
       .hero-location-title { font-size: 2.2rem; }
       .split-section { flex-direction: column; gap: 30px; margin: 40px auto; }
       .carousel-container { max-width: 100%; height: 350px; }
@@ -311,7 +335,7 @@
     </div>
   </header>
 
-  <!-- 2. CARRUSEL + MENSAJE BONITO (NUESTRA HISTORIA) -->
+  <!-- 2. CARRUSEL + MENSAJE BONITO -->
   <main class="split-section">
     <div class="carousel-container">
       <img src="./tarjeta.png" class="carousel-slide active" alt="Foto 1">
@@ -334,34 +358,35 @@
     </div>
   </main>
 
-  <!-- 3. SECCIÓN 4 BOTONES CON IMAGEN -->
+  <!-- 3. SECCIÓN 4 BOTONES RECTANGULARES CON IMAGEN -->
   <section class="grid-buttons">
     <a href="#" class="btn-item">
       <img src="./ubicacion.jpg" alt="Ubicación">
-      <span>UBICACIÓN</span>
+      <span class="btn-style">UBICACIÓN</span>
     </a>
     <a href="#" class="btn-item">
       <img src="./dress.jpg" alt="Dress Code">
-      <span>DRESS CODE</span>
+      <span class="btn-style">DRESS CODE</span>
     </a>
     <a href="#" class="btn-item">
       <img src="./alojamiento.jpg" alt="Alojamiento">
-      <span>ALOJAMIENTO</span>
+      <span class="btn-style">ALOJAMIENTO</span>
     </a>
     <a href="#" class="btn-item">
       <img src="./regalo.jpg" alt="Regalo">
-      <span>REGALO</span>
+      <span class="btn-style">REGALO</span>
     </a>
   </section>
 
-  <!-- 4. IMAGEN PLANNING DEL DÍA (SIN TÍTULO) -->
+  <!-- 4. IMAGEN PLANNING DEL DÍA -->
   <section class="planning-section">
     <img src="./planning.jpg" alt="Planning del Día">
   </section>
 
-  <!-- 5. CONTEO REGRESIVO -->
+  <!-- 5. CONTEO REGRESIVO + BOTÓN DE CONFIRMACIÓN -->
   <section class="countdown-section">
     <h3>faltan muy pocos días para celebrar juntos</h3>
+    
     <div class="countdown">
       <div class="time-block">
         <span class="number" id="days">0</span>
@@ -380,11 +405,14 @@
         <span class="label">Segundos</span>
       </div>
     </div>
+
+    <!-- Botón Confirmar Asistencia -->
+    <a href="#" class="btn-style btn-confirm">CONFIRMAR ASISTENCIA</a>
   </section>
 
-  <!-- SCRIPTS (CARRUSEL + TIMER) -->
+  <!-- SCRIPTS -->
   <script>
-    // Transición del carrusel de imágenes
+    // Carrusel
     let currentSlide = 0;
     const slides = document.querySelectorAll('.carousel-slide');
 
@@ -396,7 +424,7 @@
     }
     setInterval(nextSlide, 4000);
 
-    // Lógica del Conteo Regresivo
+    // Conteo Regresivo
     const weddingDate = new Date("Dec 12, 2026 00:00:00").getTime();
     function updateTimer() {
       const now = new Date().getTime();
