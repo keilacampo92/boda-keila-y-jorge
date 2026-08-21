@@ -33,9 +33,9 @@
       min-height: 100vh;
       min-height: 100dvh;
       overflow: hidden;
+      perspective: 1200px; /* Profundidad 3D */
     }
 
-    /* En móvil ocupa toda la pantalla */
     .invitation-container {
       position: relative;
       width: 100vw;
@@ -45,10 +45,11 @@
       max-height: 800px;
       overflow: hidden;
       cursor: pointer;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+      transform-style: preserve-3d;
     }
 
-    /* Tarjeta Interior de Invitación */
+    /* Tarjeta Interior */
     .card {
       position: absolute;
       top: 0;
@@ -116,7 +117,7 @@
       text-transform: uppercase;
     }
 
-    /* Textura de Papel Real (.png) */
+    /* Textura de Papel Real */
     .paper-real {
       background-color: var(--verde-salvia);
       background-image: url('./papel.png');
@@ -124,46 +125,70 @@
       background-position: center;
     }
 
-    /* Solapas con apertura en 4 esquinas */
+    /* Solapas con relieves y pliegues visibles */
     .flap {
       position: absolute;
       width: 100%;
       height: 100%;
       z-index: 3;
-      transition: transform 2.2s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: transform 2.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 2s ease;
+      transform-style: preserve-3d;
     }
 
     .flap-top {
       top: 0; left: 0;
       clip-path: polygon(0 0, 100% 0, 50% 50%);
+      transform-origin: top center;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.35));
     }
 
     .flap-bottom {
       top: 0; left: 0;
       clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+      transform-origin: bottom center;
+      filter: drop-shadow(0 -4px 8px rgba(0,0,0,0.35));
     }
 
     .flap-left {
       top: 0; left: 0;
       clip-path: polygon(0 0, 0 100%, 50% 50%);
+      transform-origin: left center;
+      filter: drop-shadow(4px 0 8px rgba(0,0,0,0.35));
     }
 
     .flap-right {
       top: 0; left: 0;
       clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+      transform-origin: right center;
+      filter: drop-shadow(-4px 0 8px rgba(0,0,0,0.35));
     }
 
-    /* Sello PNG Real */
+    /* Líneas de doblez en X visibles desde el inicio */
+    .fold-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 3;
+      pointer-events: none;
+      background: 
+        linear-gradient(to bottom right, transparent 49.5%, rgba(0,0,0,0.18) 50%, transparent 50.5%),
+        linear-gradient(to bottom left, transparent 49.5%, rgba(0,0,0,0.18) 50%, transparent 50.5%);
+      transition: opacity 0.8s ease;
+    }
+
+    /* Sello PNG */
     .seal-wrapper {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 90px;
-      height: 90px;
+      width: 95px;
+      height: 95px;
       z-index: 4;
       transition: transform 1.2s ease, opacity 0.8s ease;
-      filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.4));
     }
 
     .seal-wrapper img {
@@ -172,15 +197,34 @@
       object-fit: contain;
     }
 
-    /* Animación de apertura */
-    .invitation-container.open .flap-top { transform: translateY(-100%); }
-    .invitation-container.open .flap-bottom { transform: translateY(100%); }
-    .invitation-container.open .flap-left { transform: translateX(-100%); }
-    .invitation-container.open .flap-right { transform: translateX(100%); }
-    
+    /* Animación de apertura 3D suave */
+    .invitation-container.open .flap-top {
+      transform: rotateX(170deg) translateY(-10px);
+      opacity: 0;
+    }
+
+    .invitation-container.open .flap-bottom {
+      transform: rotateX(-170deg) translateY(10px);
+      opacity: 0;
+    }
+
+    .invitation-container.open .flap-left {
+      transform: rotateY(-170deg) translateX(-10px);
+      opacity: 0;
+    }
+
+    .invitation-container.open .flap-right {
+      transform: rotateY(170deg) translateX(10px);
+      opacity: 0;
+    }
+
+    .invitation-container.open .fold-lines {
+      opacity: 0;
+    }
+
     .invitation-container.open .seal-wrapper {
       opacity: 0;
-      transform: translate(-50%, -50%) scale(0.3);
+      transform: translate(-50%, -50%) scale(0.2) rotate(15deg);
       pointer-events: none;
     }
 
@@ -193,7 +237,7 @@
       color: #FFF;
       text-transform: uppercase;
       font-weight: 500;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
       pointer-events: none;
     }
   </style>
@@ -202,15 +246,21 @@
 
   <div class="invitation-container" id="invitation" onclick="openEnvelope()">
     
+    <!-- Sombras de los pliegues -->
+    <div class="fold-lines"></div>
+
+    <!-- Solapas con biseles -->
     <div class="flap flap-top paper-real"></div>
     <div class="flap flap-bottom paper-real"></div>
     <div class="flap flap-left paper-real"></div>
     <div class="flap flap-right paper-real"></div>
 
+    <!-- Sello -->
     <div class="seal-wrapper">
-      <img src="./sello.png" alt="Sello de Cera K&J">
+      <img src="./sello.png" alt="Sello de Cera">
     </div>
 
+    <!-- Tarjeta Interior -->
     <div class="card">
       <div class="card-border"></div>
 
