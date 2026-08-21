@@ -6,7 +6,7 @@
   <title>Invitación Boda - Keila & Jorge</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -50,7 +50,7 @@
       background-color: #8c8b6d;
     }
 
-    /* Tarjeta Interior */
+    /* Tarjeta Interior con Imagen de Canva */
     .card {
       position: absolute;
       top: 0;
@@ -58,56 +58,30 @@
       width: 100%;
       height: 100%;
       background-color: var(--crema-cal);
-      padding: 40px 25px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
       z-index: 1;
       transform: scale(0.96);
       transition: transform 6s cubic-bezier(0.16, 1, 0.3, 1) 1s;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 30px;
+      overflow: hidden;
     }
 
-    .card-border {
+    .card-img {
       position: absolute;
-      top: 15px;
-      left: 15px;
-      right: 15px;
-      bottom: 15px;
-      border: 1px solid var(--terracota);
-      pointer-events: none;
-    }
-
-    .parents-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem;
-      line-height: 1.45;
-    }
-
-    .invitation-line {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      color: var(--terracota);
-      font-size: 1.1rem;
-    }
-
-    .couples-names {
-      font-family: 'Alex Brush', cursive;
-      font-size: 3.2rem;
-      color: var(--terracota);
-      line-height: 1.1;
-    }
-
-    .date-location {
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      color: var(--terracota);
-      font-weight: 500;
-      text-transform: uppercase;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
     }
 
     .btn-enter {
+      position: relative;
+      z-index: 2;
       display: inline-block;
       padding: 14px 28px;
       background-color: var(--verde-salvia);
@@ -118,6 +92,13 @@
       border-radius: 3px;
       font-weight: 500;
       text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .btn-enter:hover {
+      background-color: var(--terracota);
+      transform: scale(1.03);
     }
 
     /* Textura de Papel Real */
@@ -128,7 +109,7 @@
       background-position: center;
     }
 
-    /* SOLAPAS 3D CON LUZ Y SOMBRA */
+    /* SOLAPAS 3D */
     .flap {
       position: absolute;
       width: 100%;
@@ -248,27 +229,9 @@
       <img src="./sello.png" alt="Sello de Cera">
     </div>
 
+    <!-- Tarjeta Interior -->
     <div class="card">
-      <div class="card-border"></div>
-
-      <div class="parents-text">
-        Albert José Campo Ruiz & Nulbenis Camargo Medina<br>
-        &<br>
-        Jorge Enrique Méndez Maldonado & Greisy Amparo Higuera de Méndez
-      </div>
-
-      <div class="invitation-line">
-        Tienen el gusto de invitarlo a la boda de sus hijos
-      </div>
-
-      <div class="couples-names">
-        Keila Virginia & Jorge Iván
-      </div>
-
-      <div class="date-location">
-        12 DE DICIEMBRE DE 2026<br>BARICHARA, SANTANDER
-      </div>
-
+      <img src="./tarjeta.png" alt="Tarjeta de Invitación" class="card-img">
       <a href="#bienvenida" class="btn-enter" onclick="event.stopPropagation()">VER DETALLES DE LA BODA</a>
     </div>
 
