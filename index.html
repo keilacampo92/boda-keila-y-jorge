@@ -33,7 +33,7 @@
       min-height: 100vh;
       min-height: 100dvh;
       overflow: hidden;
-      perspective: 1400px;
+      perspective: 1600px;
     }
 
     .invitation-container {
@@ -64,6 +64,8 @@
       justify-content: space-between;
       align-items: center;
       z-index: 1;
+      transform: scale(0.96);
+      transition: transform 6s cubic-bezier(0.16, 1, 0.3, 1) 1s;
     }
 
     .card-border {
@@ -125,42 +127,43 @@
       background-position: center;
     }
 
-    /* Solapas con animacion pausada de 4.8 segundos */
+    /* Solapas con apertura lenta cinematográfica (7 segundos) */
     .flap {
       position: absolute;
       width: 100%;
       height: 100%;
       z-index: 3;
-      transition: transform 4.8s cubic-bezier(0.1, 1, 0.1, 1), opacity 3.8s ease;
+      transition: transform 7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s, opacity 5.5s cubic-bezier(0.22, 1, 0.36, 1) 1.5s;
       transform-style: preserve-3d;
+      backface-visibility: hidden;
     }
 
     .flap-top {
       top: 0; left: 0;
       clip-path: polygon(0 0, 100% 0, 50% 50%);
       transform-origin: top center;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.35));
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
     }
 
     .flap-bottom {
       top: 0; left: 0;
       clip-path: polygon(0 100%, 100% 100%, 50% 50%);
       transform-origin: bottom center;
-      filter: drop-shadow(0 -4px 8px rgba(0,0,0,0.35));
+      filter: drop-shadow(0 -6px 12px rgba(0,0,0,0.3));
     }
 
     .flap-left {
       top: 0; left: 0;
       clip-path: polygon(0 0, 0 100%, 50% 50%);
       transform-origin: left center;
-      filter: drop-shadow(4px 0 8px rgba(0,0,0,0.35));
+      filter: drop-shadow(6px 0 12px rgba(0,0,0,0.3));
     }
 
     .flap-right {
       top: 0; left: 0;
       clip-path: polygon(100% 0, 100% 100%, 50% 50%);
       transform-origin: right center;
-      filter: drop-shadow(-4px 0 8px rgba(0,0,0,0.35));
+      filter: drop-shadow(-6px 0 12px rgba(0,0,0,0.3));
     }
 
     /* Sombras de doblez */
@@ -175,20 +178,20 @@
       background: 
         linear-gradient(to bottom right, transparent 49.5%, rgba(0,0,0,0.18) 50%, transparent 50.5%),
         linear-gradient(to bottom left, transparent 49.5%, rgba(0,0,0,0.18) 50%, transparent 50.5%);
-      transition: opacity 1.8s ease;
+      transition: opacity 2s ease;
     }
 
-    /* Sello PNG */
+    /* SELLO DE CERA (Doble de tamaño: 190px) */
     .seal-wrapper {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 95px;
-      height: 95px;
+      width: 190px;
+      height: 190px;
       z-index: 4;
-      transition: transform 3.5s cubic-bezier(0.1, 1, 0.1, 1), opacity 2.5s ease;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.4));
+      transition: transform 3.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 2.5s cubic-bezier(0.25, 1, 0.5, 1);
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.45));
     }
 
     .seal-wrapper img {
@@ -197,24 +200,24 @@
       object-fit: contain;
     }
 
-    /* Animación de apertura ultra suave */
+    /* Animaciones de Apertura */
     .invitation-container.open .flap-top {
-      transform: rotateX(165deg) translateY(-15px);
+      transform: rotateX(175deg) translateY(-20px);
       opacity: 0;
     }
 
     .invitation-container.open .flap-bottom {
-      transform: rotateX(-165deg) translateY(15px);
+      transform: rotateX(-175deg) translateY(20px);
       opacity: 0;
     }
 
     .invitation-container.open .flap-left {
-      transform: rotateY(-165deg) translateX(-15px);
+      transform: rotateY(-175deg) translateX(-20px);
       opacity: 0;
     }
 
     .invitation-container.open .flap-right {
-      transform: rotateY(165deg) translateX(15px);
+      transform: rotateY(175deg) translateX(20px);
       opacity: 0;
     }
 
@@ -224,8 +227,12 @@
 
     .invitation-container.open .seal-wrapper {
       opacity: 0;
-      transform: translate(-50%, -50%) scale(0.2) rotate(10deg);
+      transform: translate(-50%, -50%) scale(0.4) rotate(8deg);
       pointer-events: none;
+    }
+
+    .invitation-container.open .card {
+      transform: scale(1);
     }
 
     .tap-hint {
@@ -239,6 +246,7 @@
       font-weight: 500;
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
       pointer-events: none;
+      transition: opacity 1s ease;
     }
   </style>
 </head>
@@ -288,7 +296,7 @@
   <script>
     function openEnvelope() {
       document.getElementById('invitation').classList.add('open');
-      document.getElementById('hint').style.display = 'none';
+      document.getElementById('hint').style.opacity = '0';
     }
   </script>
 
