@@ -6,11 +6,12 @@
   <title>Invitación Boda - Keila & Jorge</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --verde-salvia: #9B9A79;
+      --verde-oscuro: #7E7D5F;
       --terracota: #B86F4A;
       --crema-cal: #F8F6F0;
       --texto-oscuro: #2C2C2C;
@@ -24,6 +25,8 @@
 
     body {
       background-color: var(--crema-cal);
+      background-image: radial-gradient(#e2decb 0.8px, transparent 0.8px);
+      background-size: 14px 14px;
       font-family: 'Montserrat', sans-serif;
       color: var(--texto-oscuro);
       display: flex;
@@ -35,108 +38,169 @@
       padding: 20px;
     }
 
-    .container {
+    /* Contenedor Principal (Proporción Móvil Elegante) */
+    .invitation-container {
       position: relative;
-      width: 320px;
-      height: 460px;
+      width: 340px;
+      height: 520px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.18);
+      border-radius: 6px;
+      overflow: hidden;
       cursor: pointer;
     }
 
-    /* Tarjeta Fija de Fondo */
+    /* Tarjeta Interior (Aparece detrás al abrir) */
     .card {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: var(--crema-cal);
-      border: 1px solid var(--terracota);
-      padding: 30px 20px;
+      background-color: var(--crema-cal);
+      padding: 35px 22px 25px 22px;
       text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border-radius: 4px;
+      align-items: center;
       z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
     }
 
-    /* Sobre Real (Imagen sobrepuesta) */
-    .envelope-cover {
+    /* Marco Fino Terracota */
+    .card-border {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-      transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.6s ease;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-      border-radius: 4px;
-      overflow: hidden;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      border: 1px solid var(--terracota);
+      pointer-events: none;
     }
 
-    .envelope-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Tipografías */
+    /* Textos de la Tarjeta */
     .parents-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.92rem;
-      line-height: 1.4;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: #3A3A3A;
     }
 
     .invitation-line {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       color: var(--terracota);
-      font-size: 1rem;
+      font-size: 1.05rem;
       margin: 8px 0;
     }
 
     .couples-names {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 600;
-      color: var(--verde-salvia);
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-family: 'Alex Brush', cursive;
+      font-size: 2.8rem;
+      color: var(--terracota);
+      line-height: 1.1;
+      margin: 10px 0;
     }
 
     .date-location {
-      font-size: 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.68rem;
       letter-spacing: 2px;
       color: var(--terracota);
       font-weight: 500;
+      text-transform: uppercase;
     }
 
     .btn-enter {
       display: inline-block;
       margin-top: 10px;
-      padding: 12px 20px;
+      padding: 12px 24px;
       background-color: var(--verde-salvia);
       color: #FFF;
       text-decoration: none;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       letter-spacing: 1.5px;
-      border-radius: 2px;
+      border-radius: 3px;
       font-weight: 500;
+      text-transform: uppercase;
+      transition: background-color 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    /* Estado Abierto */
-    .container.open .envelope-cover {
-      transform: translateY(-100%);
+    .btn-enter:hover {
+      background-color: var(--verde-oscuro);
+    }
+
+    /* Puertas del Sobre (Izquierda y Derecha) */
+    .door {
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background-color: var(--verde-salvia);
+      z-index: 3;
+      transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+      /* Textura vegetal dorada/relevada sutil */
+      background-image: radial-gradient(rgba(255,255,255,0.12) 1px, transparent 0);
+      background-size: 16px 16px;
+    }
+
+    .door-left {
+      left: 0;
+      border-right: 1px solid rgba(0,0,0,0.12);
+      box-shadow: 4px 0 12px rgba(0,0,0,0.15);
+    }
+
+    .door-right {
+      right: 0;
+      border-left: 1px solid rgba(0,0,0,0.12);
+      box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+    }
+
+    /* Sello Central Interactivo */
+    .seal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      background-color: var(--terracota);
+      border-radius: 50%;
+      color: #FFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      z-index: 4;
+      transition: transform 0.6s ease, opacity 0.4s ease;
+      border: 2px solid #D48C67;
+    }
+
+    /* Estado Abierto (Las puertas se abren hacia los lados) */
+    .invitation-container.open .door-left {
+      transform: translateX(-100%);
+    }
+
+    .invitation-container.open .door-right {
+      transform: translateX(100%);
+    }
+
+    .invitation-container.open .seal {
       opacity: 0;
+      transform: translate(-50%, -50%) scale(0.5);
       pointer-events: none;
     }
 
+    /* Indicador inferior */
     .tap-hint {
       margin-top: 25px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       letter-spacing: 2px;
-      color: var(--verde-salvia);
+      color: var(--verde-oscuro);
       text-transform: uppercase;
       font-weight: 500;
     }
@@ -144,15 +208,21 @@
 </head>
 <body>
 
-  <div class="container" id="wrapper" onclick="openEnvelope()">
-    <!-- Tarjeta de Texto -->
+  <div class="invitation-container" id="invitation" onclick="openEnvelope()">
+    
+    <div class="door door-left"></div>
+    
+    <div class="door door-right"></div>
+
+    <div class="seal" id="seal">K & J</div>
+
     <div class="card">
+      <div class="card-border"></div>
+
       <div class="parents-text">
-        Albert José Campo Ruiz<br>
-        Nulbenis Camargo Medina<br>
+        Albert José Campo Ruiz & Nulbenis Camargo Medina<br>
         &<br>
-        Jorge Enrique Méndez Maldonado<br>
-        Greisy Amparo Higuera de Méndez
+        Jorge Enrique Méndez Maldonado & Greisy Amparo Higuera de Méndez
       </div>
 
       <div class="invitation-line">
@@ -160,28 +230,27 @@
       </div>
 
       <div class="couples-names">
-        Keila Virginia<br>&<br>Jorge Iván
+        Keila Virginia & Jorge Iván
       </div>
 
       <div class="date-location">
-        12 · 12 · 2026<br>BARICHARA, SANTANDER
+        12 DE DICIEMBRE DE 2026<br>BARICHARA, SANTANDER
       </div>
 
       <a href="#bienvenida" class="btn-enter" onclick="event.stopPropagation()">VER DETALLES DE LA BODA</a>
     </div>
 
-    <!-- Foto Real del Sobre -->
-    <div class="envelope-cover">
-      <img src="sobre.jpg" alt="Sobre de Invitación">
-    </div>
   </div>
 
-  <div class="tap-hint" id="hint">✉️ TOCA EL SOBRE PARA ABRIR</div>
+  <div class="tap-hint" id="hint">✉️ TOCA PARA ABRIR LA INVITACIÓN</div>
 
   <script>
     function openEnvelope() {
-      document.getElementById('wrapper').classList.add('open');
-      document.getElementById('hint').style.display = 'none';
+      const container = document.getElementById('invitation');
+      const hint = document.getElementById('hint');
+      
+      container.classList.add('open');
+      hint.style.display = 'none';
     }
   </script>
 
