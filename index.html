@@ -11,8 +11,9 @@
   <style>
     :root {
       --verde-salvia: #9B9A79;
-      --verde-oscuro: #7E7D5F;
+      --verde-sombra: #7E7D5F;
       --terracota: #B86F4A;
+      --terracota-brillo: #D48C67;
       --crema-cal: #F8F6F0;
       --texto-oscuro: #2C2C2C;
     }
@@ -38,18 +39,24 @@
       padding: 20px;
     }
 
-    /* Contenedor Principal (Proporción Móvil Elegante) */
+    /* Contenedor Principal */
     .invitation-container {
       position: relative;
       width: 340px;
       height: 520px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.18);
-      border-radius: 6px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.22);
+      border-radius: 4px;
       overflow: hidden;
       cursor: pointer;
     }
 
-    /* Tarjeta Interior (Aparece detrás al abrir) */
+    /* Textura de papel de algodón integrada */
+    .paper-texture {
+      background-color: var(--verde-salvia);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+    }
+
+    /* Tarjeta Interior de Invitación */
     .card {
       position: absolute;
       top: 0;
@@ -64,10 +71,9 @@
       justify-content: space-between;
       align-items: center;
       z-index: 1;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
     }
 
-    /* Marco Fino Terracota */
     .card-border {
       position: absolute;
       top: 12px;
@@ -78,7 +84,6 @@
       pointer-events: none;
     }
 
-    /* Textos de la Tarjeta */
     .parents-text {
       font-family: 'Cormorant Garamond', serif;
       font-size: 0.9rem;
@@ -123,84 +128,113 @@
       border-radius: 3px;
       font-weight: 500;
       text-transform: uppercase;
-      transition: background-color 0.3s;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
-    .btn-enter:hover {
-      background-color: var(--verde-oscuro);
-    }
-
-    /* Puertas del Sobre (Izquierda y Derecha) */
-    .door {
+    /* Solapas en 4 partes (Corte en cruz X) */
+    .flap {
       position: absolute;
-      top: 0;
-      width: 50%;
+      width: 100%;
       height: 100%;
-      background-color: var(--verde-salvia);
       z-index: 3;
-      transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
-      /* Textura vegetal dorada/relevada sutil */
-      background-image: radial-gradient(rgba(255,255,255,0.12) 1px, transparent 0);
-      background-size: 16px 16px;
+      transition: transform 2.2s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
-    .door-left {
+    /* Superior */
+    .flap-top {
+      top: 0;
       left: 0;
-      border-right: 1px solid rgba(0,0,0,0.12);
-      box-shadow: 4px 0 12px rgba(0,0,0,0.15);
+      clip-path: polygon(0 0, 100% 0, 50% 50%);
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
     }
 
-    .door-right {
-      right: 0;
-      border-left: 1px solid rgba(0,0,0,0.12);
-      box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+    /* Inferior */
+    .flap-bottom {
+      top: 0;
+      left: 0;
+      clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+      filter: drop-shadow(0 -4px 6px rgba(0,0,0,0.15));
     }
 
-    /* Sello Central Interactivo */
-    .seal {
+    /* Izquierda */
+    .flap-left {
+      top: 0;
+      left: 0;
+      clip-path: polygon(0 0, 0 100%, 50% 50%);
+      filter: drop-shadow(4px 0 6px rgba(0,0,0,0.15));
+    }
+
+    /* Derecha */
+    .flap-right {
+      top: 0;
+      left: 0;
+      clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+      filter: drop-shadow(-4px 0 6px rgba(0,0,0,0.15));
+    }
+
+    /* Sello de Cera Realista en 3D */
+    .seal-wrapper {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 56px;
-      height: 56px;
-      background-color: var(--terracota);
+      width: 68px;
+      height: 68px;
+      z-index: 4;
+      transition: transform 1s ease, opacity 0.8s ease;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+    }
+
+    .seal-body {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 35% 35%, #C87A53 0%, #A35835 70%, #7A3B1E 100%);
       border-radius: 50%;
-      color: #FFF;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      z-index: 4;
-      transition: transform 0.6s ease, opacity 0.4s ease;
-      border: 2px solid #D48C67;
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -3px 6px rgba(0,0,0,0.4);
+      border: 1px solid #8D4625;
+      position: relative;
     }
 
-    /* Estado Abierto (Las puertas se abren hacia los lados) */
-    .invitation-container.open .door-left {
+    .seal-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #F8F6F0;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.6), -1px -1px 1px rgba(255,255,255,0.2);
+      letter-spacing: 1px;
+    }
+
+    /* Animación de apertura en 4 direcciones (Sutil y paulatina) */
+    .invitation-container.open .flap-top {
+      transform: translateY(-100%);
+    }
+
+    .invitation-container.open .flap-bottom {
+      transform: translateY(100%);
+    }
+
+    .invitation-container.open .flap-left {
       transform: translateX(-100%);
     }
 
-    .invitation-container.open .door-right {
+    .invitation-container.open .flap-right {
       transform: translateX(100%);
     }
 
-    .invitation-container.open .seal {
+    .invitation-container.open .seal-wrapper {
       opacity: 0;
-      transform: translate(-50%, -50%) scale(0.5);
+      transform: translate(-50%, -50%) scale(0.3);
       pointer-events: none;
     }
 
-    /* Indicador inferior */
     .tap-hint {
       margin-top: 25px;
       font-size: 0.78rem;
       letter-spacing: 2px;
-      color: var(--verde-oscuro);
+      color: var(--verde-sombra);
       text-transform: uppercase;
       font-weight: 500;
     }
@@ -210,11 +244,16 @@
 
   <div class="invitation-container" id="invitation" onclick="openEnvelope()">
     
-    <div class="door door-left"></div>
-    
-    <div class="door door-right"></div>
+    <div class="flap flap-top paper-texture"></div>
+    <div class="flap flap-bottom paper-texture"></div>
+    <div class="flap flap-left paper-texture"></div>
+    <div class="flap flap-right paper-texture"></div>
 
-    <div class="seal" id="seal">K & J</div>
+    <div class="seal-wrapper" id="seal">
+      <div class="seal-body">
+        <span class="seal-text">K & J</span>
+      </div>
+    </div>
 
     <div class="card">
       <div class="card-border"></div>
