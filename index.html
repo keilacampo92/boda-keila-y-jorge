@@ -11,7 +11,6 @@
   <style>
     :root {
       --verde-salvia: #9B9A79;
-      --verde-sombra: #7E7D5F;
       --terracota: #B86F4A;
       --crema-cal: #F8F6F0;
       --texto-oscuro: #2C2C2C;
@@ -25,9 +24,6 @@
 
     body {
       background-color: var(--crema-cal);
-      /* Textura sutil de fondo */
-      background-image: radial-gradient(#e2decb 0.75px, transparent 0.75px);
-      background-size: 12px 12px;
       font-family: 'Montserrat', sans-serif;
       color: var(--texto-oscuro);
       display: flex;
@@ -35,131 +31,82 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow: hidden;
       padding: 20px;
     }
 
-    .scene {
-      perspective: 1200px;
-      width: 330px;
-      height: 480px;
+    .container {
       position: relative;
-    }
-
-    .envelope {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      background: var(--verde-sombra);
-      border-radius: 4px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      width: 320px;
+      height: 460px;
       cursor: pointer;
     }
 
-    /* Textura de Papel de Algodón integrada */
-    .paper-texture {
-      background-color: var(--verde-salvia);
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.07'/%3E%3C/svg%3E");
-    }
-
-    .envelope-back {
+    /* Tarjeta Fija de Fondo */
+    .card {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: #EAE6DB;
-      border-radius: 4px;
-      z-index: 1;
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.08);
-    }
-
-    /* Tarjeta rígida interior */
-    .card {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      width: 300px;
-      height: 450px;
       background: var(--crema-cal);
       border: 1px solid var(--terracota);
-      padding: 25px 18px;
+      padding: 30px 20px;
       text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-      z-index: 2;
-      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border-radius: 2px;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+      border-radius: 4px;
+      z-index: 1;
     }
 
-    /* Pocket Frontal Realista con biselado de sombras */
-    .envelope-pocket {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 280px;
-      z-index: 3;
-      clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-    }
-
-    .pocket-shape {
-      width: 100%;
-      height: 100%;
-      background-color: var(--verde-salvia);
-      clip-path: polygon(0 40%, 50% 0, 100% 40%, 100% 100%, 0 100%);
-      filter: drop-shadow(0 -2px 4px rgba(0,0,0,0.12));
-    }
-
-    /* Solapa Superior con doblez 3D */
-    .envelope-flap-wrapper {
+    /* Sobre Real (Imagen sobrepuesta) */
+    .envelope-cover {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: 220px;
-      z-index: 4;
-      transform-origin: top;
-      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.1s 0.3s;
+      height: 100%;
+      z-index: 2;
+      transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.6s ease;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      border-radius: 4px;
+      overflow: hidden;
     }
 
-    .envelope-flap {
+    .envelope-cover img {
       width: 100%;
       height: 100%;
-      background-color: var(--verde-salvia);
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      object-fit: cover;
     }
 
-    /* Textos */
+    /* Tipografías */
     .parents-text {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.88rem;
-      line-height: 1.35;
+      font-size: 0.92rem;
+      line-height: 1.4;
     }
 
     .invitation-line {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
       color: var(--terracota);
-      font-size: 0.98rem;
-      margin: 6px 0;
+      font-size: 1rem;
+      margin: 8px 0;
     }
 
     .couples-names {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 600;
-      color: var(--verde-sombra);
+      color: var(--verde-salvia);
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
     .date-location {
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       letter-spacing: 2px;
       color: var(--terracota);
       font-weight: 500;
@@ -167,35 +114,29 @@
 
     .btn-enter {
       display: inline-block;
-      margin-top: 8px;
-      padding: 10px 16px;
+      margin-top: 10px;
+      padding: 12px 20px;
       background-color: var(--verde-salvia);
       color: #FFF;
       text-decoration: none;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       letter-spacing: 1.5px;
       border-radius: 2px;
       font-weight: 500;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    /* Animación de apertura */
-    .envelope.open .envelope-flap-wrapper {
-      transform: rotateX(180deg);
-      z-index: 1;
-    }
-
-    .envelope.open .card {
-      transform: translateY(-250px);
-      z-index: 5;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.22);
+    /* Estado Abierto */
+    .container.open .envelope-cover {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
     }
 
     .tap-hint {
-      margin-top: 30px;
-      font-size: 0.78rem;
+      margin-top: 25px;
+      font-size: 0.8rem;
       letter-spacing: 2px;
-      color: var(--verde-sombra);
+      color: var(--verde-salvia);
       text-transform: uppercase;
       font-weight: 500;
     }
@@ -203,61 +144,44 @@
 </head>
 <body>
 
-  <div class="scene">
-    <div class="envelope" id="envelope" onclick="toggleEnvelope()">
-      <div class="envelope-back"></div>
-      
-      <!-- Tarjeta -->
-      <div class="card paper-texture">
-        <div class="parents-text">
-          Albert José Campo Ruiz<br>
-          Nulbenis Camargo Medina<br>
-          &<br>
-          Jorge Enrique Méndez Maldonado<br>
-          Greisy Amparo Higuera de Méndez
-        </div>
-
-        <div class="invitation-line">
-          Tienen el gusto de invitarlo a la boda de sus hijos
-        </div>
-
-        <div class="couples-names">
-          Keila Virginia<br>&<br>Jorge Iván
-        </div>
-
-        <div class="date-location">
-          12 · 12 · 2026<br>BARICHARA, SANTANDER
-        </div>
-
-        <a href="#bienvenida" class="btn-enter" onclick="event.stopPropagation()">VER DETALLES DE LA BODA</a>
+  <div class="container" id="wrapper" onclick="openEnvelope()">
+    <!-- Tarjeta de Texto -->
+    <div class="card">
+      <div class="parents-text">
+        Albert José Campo Ruiz<br>
+        Nulbenis Camargo Medina<br>
+        &<br>
+        Jorge Enrique Méndez Maldonado<br>
+        Greisy Amparo Higuera de Méndez
       </div>
 
-      <!-- Pocket Frontal -->
-      <div class="envelope-pocket">
-        <div class="pocket-shape paper-texture"></div>
+      <div class="invitation-line">
+        Tienen el gusto de invitarlo a la boda de sus hijos
       </div>
 
-      <!-- Solapa -->
-      <div class="envelope-flap-wrapper">
-        <div class="envelope-flap paper-texture"></div>
+      <div class="couples-names">
+        Keila Virginia<br>&<br>Jorge Iván
       </div>
+
+      <div class="date-location">
+        12 · 12 · 2026<br>BARICHARA, SANTANDER
+      </div>
+
+      <a href="#bienvenida" class="btn-enter" onclick="event.stopPropagation()">VER DETALLES DE LA BODA</a>
+    </div>
+
+    <!-- Foto Real del Sobre -->
+    <div class="envelope-cover">
+      <img src="sobre.jpg" alt="Sobre de Invitación">
     </div>
   </div>
 
-  <div class="tap-hint" id="hint">✉️ Toca el sobre para abrir</div>
+  <div class="tap-hint" id="hint">✉️ TOCA EL SOBRE PARA ABRIR</div>
 
   <script>
-    function toggleEnvelope() {
-      const envelope = document.getElementById('envelope');
-      const hint = document.getElementById('hint');
-      
-      envelope.classList.toggle('open');
-      
-      if (envelope.classList.contains('open')) {
-        hint.innerHTML = "✨ Toca de nuevo para cerrar";
-      } else {
-        hint.innerHTML = "✉️ Toca el sobre para abrir";
-      }
+    function openEnvelope() {
+      document.getElementById('wrapper').classList.add('open');
+      document.getElementById('hint').style.display = 'none';
     }
   </script>
 
