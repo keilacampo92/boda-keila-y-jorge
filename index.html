@@ -33,7 +33,7 @@
       min-height: 100vh;
       min-height: 100dvh;
       overflow: hidden;
-      perspective: 1600px;
+      perspective: 1500px;
     }
 
     .invitation-container {
@@ -45,7 +45,7 @@
       max-height: 800px;
       overflow: hidden;
       cursor: pointer;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
       transform-style: preserve-3d;
     }
 
@@ -127,61 +127,52 @@
       background-position: center;
     }
 
-    /* Solapas con apertura cinematográfica */
+    /* Estructura de Solapas 3D con Sombras de Profundidad */
     .flap {
       position: absolute;
       width: 100%;
       height: 100%;
-      z-index: 3;
       transition: transform 7s cubic-bezier(0.22, 1, 0.36, 1) 0.5s, opacity 5.5s cubic-bezier(0.22, 1, 0.36, 1) 1.5s;
       transform-style: preserve-3d;
       backface-visibility: hidden;
     }
 
-    .flap-top {
-      top: 0; left: 0;
-      clip-path: polygon(0 0, 100% 0, 50% 50%);
-      transform-origin: top center;
-      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
-    }
-
-    .flap-bottom {
-      top: 0; left: 0;
-      clip-path: polygon(0 100%, 100% 100%, 50% 50%);
-      transform-origin: bottom center;
-      filter: drop-shadow(0 -6px 12px rgba(0,0,0,0.3));
-    }
-
+    /* Solapas Laterales (Fondo) */
     .flap-left {
       top: 0; left: 0;
-      clip-path: polygon(0 0, 0 100%, 50% 50%);
+      z-index: 3;
+      clip-path: polygon(0 0, 0 100%, 52% 50%);
       transform-origin: left center;
-      filter: drop-shadow(6px 0 12px rgba(0,0,0,0.3));
+      filter: drop-shadow(8px 0 10px rgba(0,0,0,0.25));
     }
 
     .flap-right {
       top: 0; left: 0;
-      clip-path: polygon(100% 0, 100% 100%, 50% 50%);
-      transform-origin: right center;
-      filter: drop-shadow(-6px 0 12px rgba(0,0,0,0.3));
-    }
-
-    /* Sombras de doblez */
-    .fold-lines {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
       z-index: 3;
-      pointer-events: none;
-      background: 
-        linear-gradient(to bottom right, transparent 49.5%, rgba(0,0,0,0.18) 50%, transparent 50.5%),
-        linear-gradient(to bottom left, transparent 49.5%, rgba(0,0,0,0.18) 50%, transparent 50.5%);
-      transition: opacity 2s ease;
+      clip-path: polygon(100% 0, 100% 100%, 48% 50%);
+      transform-origin: right center;
+      filter: drop-shadow(-8px 0 10px rgba(0,0,0,0.25));
     }
 
-    /* SELLO DE CERA (+25% más grande: 238px) */
+    /* Solapa Inferior (Superpuesta sobre laterales) */
+    .flap-bottom {
+      top: 0; left: 0;
+      z-index: 4;
+      clip-path: polygon(0 100%, 100% 100%, 50% 46%);
+      transform-origin: bottom center;
+      filter: drop-shadow(0 -10px 15px rgba(0,0,0,0.35));
+    }
+
+    /* Solapa Superior (Cierra todo el sobre por encima) */
+    .flap-top {
+      top: 0; left: 0;
+      z-index: 5;
+      clip-path: polygon(0 0, 100% 0, 50% 54%);
+      transform-origin: top center;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,0.45));
+    }
+
+    /* SELLO DE CERA (238px) */
     .seal-wrapper {
       position: absolute;
       top: 50%;
@@ -189,9 +180,9 @@
       transform: translate(-50%, -50%);
       width: 238px;
       height: 238px;
-      z-index: 4;
+      z-index: 6;
       transition: transform 3.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 2.5s cubic-bezier(0.25, 1, 0.5, 1);
-      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.45));
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
     }
 
     .seal-wrapper img {
@@ -221,10 +212,6 @@
       opacity: 0;
     }
 
-    .invitation-container.open .fold-lines {
-      opacity: 0;
-    }
-
     .invitation-container.open .seal-wrapper {
       opacity: 0;
       transform: translate(-50%, -50%) scale(0.4) rotate(8deg);
@@ -238,13 +225,13 @@
     .tap-hint {
       position: absolute;
       bottom: 25px;
-      z-index: 5;
+      z-index: 7;
       font-size: 0.75rem;
       letter-spacing: 2px;
       color: #FFF;
       text-transform: uppercase;
       font-weight: 500;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.6);
       pointer-events: none;
       transition: opacity 1s ease;
     }
@@ -254,12 +241,11 @@
 
   <div class="invitation-container" id="invitation" onclick="openEnvelope()">
     
-    <div class="fold-lines"></div>
-
-    <div class="flap flap-top paper-real"></div>
-    <div class="flap flap-bottom paper-real"></div>
+    <!-- Orden de capas 3D (Izquierda/Derecha abajo, Inferior al medio, Superior arriba) -->
     <div class="flap flap-left paper-real"></div>
     <div class="flap flap-right paper-real"></div>
+    <div class="flap flap-bottom paper-real"></div>
+    <div class="flap flap-top paper-real"></div>
 
     <div class="seal-wrapper">
       <img src="./sello.png" alt="Sello de Cera">
