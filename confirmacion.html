@@ -30,12 +30,66 @@
       background-color: var(--crema-fondo);
       font-family: 'Montserrat', sans-serif;
       color: var(--texto-oscuro);
+      line-height: 1.6;
+    }
+
+    /* 1. BANNER SUPERIOR */
+    .hero-banner {
+      position: relative;
+      width: 100%;
+      min-height: 380px;
+      background-image: url('./banner.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+
+    .hero-initials {
+      font-family: 'Cinzel', serif;
+      font-size: 3rem;
+      font-weight: 500;
+      color: var(--verde-monograma);
+      letter-spacing: 6px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .hero-date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--terracota-fecha);
+      letter-spacing: 5px;
+      margin-bottom: 15px;
+    }
+
+    .hero-location-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--verde-monograma);
+      line-height: 1.1;
+    }
+
+    /* 2. SECCIÓN DEL FORMULARIO */
+    .form-section {
+      display: flex;
       justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
+      padding: 60px 20px;
     }
 
     .form-card {
@@ -46,27 +100,31 @@
       border-radius: 12px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .form-card h1 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 2.2rem;
       color: var(--verde-monograma);
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       font-weight: 600;
     }
 
-    .form-card p.subtitle {
-      font-size: 0.85rem;
-      color: var(--terracota-fecha);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 30px;
+    /* ESTILO PARA EL LOGO */
+    .form-logo {
+      max-width: 160px;
+      height: auto;
+      margin-bottom: 25px;
+      display: block;
     }
 
     .form-group {
       margin-bottom: 20px;
       text-align: left;
+      width: 100%;
     }
 
     .form-group label {
@@ -144,47 +202,68 @@
       font-weight: 500;
       display: none;
     }
+
+    @media (max-width: 768px) {
+      .hero-banner { min-height: 300px; }
+      .hero-initials { font-size: 2.5rem; }
+      .hero-location-title { font-size: 1.8rem; }
+      .form-card { padding: 30px 20px; }
+      .form-logo { max-width: 130px; }
+    }
   </style>
 </head>
 <body>
 
-  <div class="form-card">
-    <h1>CONFIRMAR ASISTENCIA</h1>
-    <p class="subtitle">KEILA &amp; JORGE · 12.12.2026</p>
+  <!-- BANNER SUPERIOR -->
+  <header class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-initials">K &amp; J</div>
+      <div class="hero-date">12 · 12 · 2026</div>
+      <div class="hero-location-title">Barichara</div>
+    </div>
+  </header>
 
-    <form id="rsvp-form">
-      <div class="form-group">
-        <label for="Nombre">Nombre Completo</label>
-        <input type="text" id="Nombre" name="Nombre" placeholder="Ej. Juan Pérez" required>
-      </div>
+  <!-- CONTENEDOR DEL FORMULARIO -->
+  <main class="form-section">
+    <div class="form-card">
+      <h1>CONFIRMAR ASISTENCIA</h1>
+      
+      <!-- LOGO AGREGADO AQUÍ -->
+      <img src="./logo.png" alt="Monograma Keila y Jorge" class="form-logo">
 
-      <div class="form-group">
-        <label for="Asistencia">¿Nos acompañarás?</label>
-        <select id="Asistencia" name="Asistencia" required>
-          <option value="Sí, ¡allí estaré!">Sí, ¡allí estaré!</option>
-          <option value="Lamentablemente no puedo">Lamentablemente no puedo</option>
-        </select>
-      </div>
+      <form id="rsvp-form" style="width: 100%;">
+        <div class="form-group">
+          <label for="Nombre">Nombre Completo</label>
+          <input type="text" id="Nombre" name="Nombre" placeholder="Ej. Juan Pérez" required>
+        </div>
 
-      <div class="form-group">
-        <label for="Mensaje">Restricciones alimentarias o mensaje especial</label>
-        <textarea id="Mensaje" name="Mensaje" rows="3" placeholder="Ej. Vegetariano, alérgico al maní..."></textarea>
-      </div>
+        <div class="form-group">
+          <label for="Asistencia">¿Nos acompañarás?</label>
+          <select id="Asistencia" name="Asistencia" required>
+            <option value="Sí, ¡allí estaré!">Sí, ¡allí estaré!</option>
+            <option value="Lamentablemente no puedo">Lamentablemente no puedo</option>
+          </select>
+        </div>
 
-      <button type="submit" id="submit-btn" class="btn-submit">ENVIAR CONFIRMACIÓN</button>
-    </form>
+        <div class="form-group">
+          <label for="Mensaje">Restricciones alimentarias o mensaje especial</label>
+          <textarea id="Mensaje" name="Mensaje" rows="3" placeholder="Ej. Vegetariano, alérgico al maní..."></textarea>
+        </div>
 
-    <div id="form-status"></div>
+        <button type="submit" id="submit-btn" class="btn-submit">ENVIAR CONFIRMACIÓN</button>
+      </form>
 
-    <a href="./bienvenida.html" class="back-link">← Volver a la invitación</a>
-  </div>
+      <div id="form-status"></div>
+
+      <a href="./bienvenida.html" class="back-link">← Volver a la invitación</a>
+    </div>
+  </main>
 
   <script>
     const form = document.getElementById('rsvp-form');
     const statusText = document.getElementById('form-status');
     const submitBtn = document.getElementById('submit-btn');
 
-    // Tu webhook de Google Sheets ya conectado
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyNUXwi0qPFoQozybelTQSy_Ls-sBN5JHxATve7azxkEc4oPG5slQknb9_KxIQbBNRq/exec';
 
     form.addEventListener('submit', e => {
