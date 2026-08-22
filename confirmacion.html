@@ -9,7 +9,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -18,7 +18,6 @@
       --verde-boton-hover: #4B5A3B;
       --crema-fondo: #FDFBF7;
       --texto-oscuro: #3A3A3A;
-      --error-color: #C57D5C;
     }
 
     * {
@@ -84,12 +83,11 @@
       transition: border-color 0.3s ease;
     }
 
-    input[type="text"]:disabled,
-    select:disabled,
-    textarea:disabled {
-      background-color: #F0F0F0;
-      color: #888888;
-      cursor: not-allowed;
+    input[type="text"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--verde-monograma);
+      background-color: #FFFFFF;
     }
 
     textarea {
@@ -113,26 +111,30 @@
       margin-top: 10px;
     }
 
-    .btn-submit:hover:not(:disabled) {
+    .btn-submit:hover {
       background-color: var(--verde-boton-hover);
     }
 
-    .btn-submit:disabled {
-      background-color: #CCCCCC;
-      cursor: not-allowed;
+    /* MENSAJE DE ÉXITO QUE REEMPLAZA AL FORMULARIO */
+    .success-container {
+      display: none;
+      padding: 20px 10px;
     }
 
-    .status-message {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 6px;
-      background-color: rgba(75, 90, 59, 0.1);
-      border: 1px solid var(--verde-monograma);
-      font-size: 0.88rem;
-      display: none;
-      line-height: 1.5;
+    .success-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
       color: var(--verde-monograma);
+      margin-bottom: 12px;
       font-weight: 600;
+    }
+
+    .success-text {
+      font-size: 0.95rem;
+      color: #555555;
+      line-height: 1.6;
+      font-weight: 300;
+      margin-bottom: 20px;
     }
 
     .back-link {
@@ -158,6 +160,7 @@
   <div class="form-card">
     <img src="./logokj.png" alt="Keila & Jorge" class="logo-img">
 
+    <!-- FORMULARIO DE CONFIRMACIÓN -->
     <form id="rsvp-form" action="https://script.google.com/macros/s/AKfycbxVmTwN80-AoJLXJhm-uf_Am1emNEWMb4xikbgxsY8Mv8Dcwhw7W1T_2mNix2hggvO6/exec" method="POST" target="hidden_iframe">
       
       <div class="form-group">
@@ -179,11 +182,13 @@
       </div>
 
       <button type="submit" class="btn-submit" id="btn-text">ENVIAR CONFIRMACIÓN</button>
-      
-      <div id="status-msg" class="status-message">
-        ¡Muchas gracias! Tu respuesta ya ha sido registrada.
-      </div>
     </form>
+
+    <!-- MENSAJE DE ÉXITO QUE APARECE AL ENVIAR -->
+    <div id="success-box" class="success-container">
+      <h2 class="success-title">¡Respuesta registrada!</h2>
+      <p class="success-text">Muchas gracias por confirmar. Tu respuesta ha sido enviada con éxito y los novios ya cuentan con tu información.</p>
+    </div>
 
     <a href="./bienvenida.html" class="back-link">&larr; Volver a la invitación</a>
   </div>
@@ -193,35 +198,37 @@
   <script>
     let submitted = false;
     const form = document.getElementById('rsvp-form');
-    const btnSubmit = document.getElementById('btn-text');
-    const statusMsg = document.getElementById('status-msg');
+    const successBox = document.getElementById('success-box');
     const iframe = document.getElementById('hidden_iframe');
-    const inputs = form.querySelectorAll('input, select, textarea');
 
-    // Función para bloquear el formulario
-    function disableForm() {
-      inputs.forEach(input => input.disabled = true);
-      btnSubmit.innerText = 'CONFIRMACIÓN ENVIADA';
-      btnSubmit.disabled = true;
-      statusMsg.style.display = 'block';
+    function hideFormAndShowSuccess() {
+      form.style.display = 'none';
+      successBox.style.display = 'block';
     }
 
-    // Comprobar si la persona ya confirmó previamente en este navegador
-    if (localStorage.getItem('boda_asistencia_enviada') === 'true') {
-      disableForm();
+    // Comprobar si ya se envió la respuesta en este navegador
+    try {
+      if (localStorage.getItem('boda_asistencia_enviada') === 'true') {
+        hideFormAndShowSuccess();
+      }
+    } catch(e) {
+      console.log('Navegador sin acceso a localStorage');
     }
 
     form.addEventListener('submit', function() {
       submitted = true;
-      btnSubmit.innerText = 'ENVIANDO...';
-      btnSubmit.disabled = true;
+      document.getElementById('btn-text').innerText = 'ENVIANDO...';
+      document.getElementById('btn-text').disabled = true;
     });
 
     iframe.addEventListener('load', function() {
       if (submitted) {
-        // Guardar marca local para evitar reenvíos
-        localStorage.setItem('boda_asistencia_enviada', 'true');
-        disableForm();
+        try {
+          localStorage.setItem('boda_asistencia_enviada', 'true');
+        } catch(e) {}
+        
+        // Ocultar el formulario por completo e impedir cualquier nuevo intento
+        hideFormAndShowSuccess();
         submitted = false;
       }
     });
