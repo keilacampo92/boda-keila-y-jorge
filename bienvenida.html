@@ -21,6 +21,7 @@
       --terracota-fecha: #C57D5C;
       --crema-fondo: #FDFBF7;
       --texto-oscuro: #3A3A3A;
+      --texto-mutado: #666666;
     }
 
     * {
@@ -41,7 +42,7 @@
     }
 
     .container {
-      max-width: 650px;
+      max-width: 680px;
       width: 100%;
       background: #FFFFFF;
       padding: 50px 35px;
@@ -92,39 +93,66 @@
       font-weight: 300;
     }
 
+    /* GRID DE BOTONES CON IMÁGENES CIRCULARES */
     .nav-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 15px;
       width: 100%;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
-    .nav-card {
-      display: block;
-      padding: 16px 20px;
-      background-color: var(--crema-fondo);
-      border: 1px solid #E5E7EB;
-      border-radius: 8px;
-      color: var(--verde-monograma);
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
     }
 
-    .nav-card:hover {
-      background-color: var(--verde-monograma);
+    .nav-item:hover {
+      transform: translateY(-4px);
+    }
+
+    .img-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 2px solid var(--verde-monograma);
+      overflow: hidden;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      background-color: var(--crema-fondo);
+    }
+
+    .img-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .nav-btn-label {
+      width: 100%;
+      padding: 10px 4px;
+      background-color: var(--verde-boton);
       color: #FFFFFF;
-      border-color: var(--verde-monograma);
-      transform: translateY(-2px);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 6px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .nav-item:hover .nav-btn-label {
+      background-color: var(--verde-monograma);
     }
 
     .btn-rsvp {
       display: inline-block;
       width: 100%;
+      max-width: 400px;
       padding: 16px 20px;
       background-color: var(--verde-boton);
       color: #FFFFFF;
@@ -139,8 +167,16 @@
     }
 
     .btn-rsvp:hover {
-      background-color: var(--verde-boton-hover);
+      background-color: var(--verde-monograma);
       transform: translateY(-2px);
+    }
+
+    footer {
+      margin-top: 35px;
+      font-size: 0.75rem;
+      color: var(--texto-mutado);
+      letter-spacing: 1px;
+      text-align: center;
     }
 
     @media (max-width: 768px) {
@@ -148,7 +184,8 @@
       .logo-header { max-width: 180px; }
       .wedding-title { font-size: 2.2rem; }
       .wedding-date { font-size: 0.95rem; }
-      .nav-grid { grid-template-columns: 1fr; }
+      .nav-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 15px; }
+      .img-circle { width: 80px; height: 80px; }
     }
   </style>
 </head>
@@ -166,14 +203,46 @@
       Estamos felices de dar el siguiente paso juntos y queremos celebrarlo rodeados de las personas que más queremos. Encuentra aquí toda la información sobre nuestro gran día.
     </p>
 
+    <!-- MENÚ NAVEGABLE CON IMÁGENES -->
     <div class="nav-grid">
-      <a href="./alojamiento.jpg" class="nav-card" target="_blank">Alojamiento</a>
-      <a href="./dress.jpg" class="nav-card" target="_blank">Código de Vestimenta</a>
-      <a href="./planning.jpg" class="nav-card" target="_blank">Itinerario</a>
-      <a href="./regalo.jpg" class="nav-card" target="_blank">Lista de Regalos</a>
+      <!-- Ubicación -->
+      <a href="./ubicacion.html" class="nav-item">
+        <div class="img-circle">
+          <img src="./sello.png" alt="Ubicación">
+        </div>
+        <span class="nav-btn-label">UBICACIÓN</span>
+      </a>
+
+      <!-- Dress Code -->
+      <a href="./dresscode.html" class="nav-item">
+        <div class="img-circle">
+          <img src="./dress.jpg" alt="Dress Code">
+        </div>
+        <span class="nav-btn-label">DRESS CODE</span>
+      </a>
+
+      <!-- Alojamiento -->
+      <a href="./alojamiento.html" class="nav-item">
+        <div class="img-circle">
+          <img src="./alojamiento.jpg" alt="Alojamiento">
+        </div>
+        <span class="nav-btn-label">ALOJAMIENTO</span>
+      </a>
+
+      <!-- Regalo -->
+      <a href="./regalo.html" class="nav-item">
+        <div class="img-circle">
+          <img src="./regalo.jpg" alt="Regalo">
+        </div>
+        <span class="nav-btn-label">REGALO</span>
+      </a>
     </div>
 
     <a href="./confirmacion.html" class="btn-rsvp">CONFIRMAR ASISTENCIA</a>
+
+    <footer>
+      Derechos reservados ® Keila & Jorge
+    </footer>
   </main>
 
 </body>
