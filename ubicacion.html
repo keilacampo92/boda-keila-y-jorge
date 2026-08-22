@@ -1,1 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ubicación - Boda Keila & Jorge</title>
+  
+  <!-- Favicon para la pestaña del navegador -->
+  <link rel="icon" type="image/png" href="./logokj.png">
 
+  <!-- Fuentes Elegantes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --verde-monograma: #4B5A3B;
+      --verde-boton: #9B9A79;
+      --verde-boton-hover: #4B5A3B;
+      --terracota: #C57D5C;
+      --terracota-suave: #D99B7E;
+      --crema-fondo: #FDFBF7;
+      --texto-oscuro: #3A3A3A;
+      --texto-mutado: #666666;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--crema-fondo);
+      font-family: 'Montserrat', sans-serif;
+      color: var(--texto-oscuro);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 650px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    /* BLOQUE 1: Cita enmarcada con barra terracota */
+    .block-header-quote {
+      background-color: #F4EFEA;
+      border-left: 6px solid var(--terracota);
+      border-radius: 0 8px 8px 0;
+      padding: 22px 28px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .block-header-quote .banner-badge {
+      display: inline-block;
+      background-color: var(--terracota);
+      color: #FFFFFF;
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    /* BLOQUE 2: Mensaje de la pareja */
+    .block-story {
+      background-color: #FFFFFF;
+      border-radius: 12px;
+      padding: 35px 30px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+      border: 1px solid #F0EAE1;
+    }
+
+    .block-story p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: var(--texto-oscuro);
+      font-weight: 400;
+    }
+
+    .block-story em {
+      font-style: italic;
+      color: var(--verde-monograma);
+      font-weight: 600;
+    }
+
+    /* ESTILO GENERAL DE CARDS CON ICONO (Bloques 3, 4 y 5) */
+    .block-card {
+      border-radius: 12px;
+      padding: 35px 30px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .icon-wrapper {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .icon-wrapper svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .block-card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .place-name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .event-info {
+      font-size: 0.9rem;
+      color: var(--texto-mutado);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    /* Botones de dirección */
+    .btn-maps {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-decoration: none;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      margin-bottom: 15px;
+    }
+
+    .btn-maps svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* BLOQUE 3: Ceremonia (Tonalidad Verde Oliva Suave) */
+    .block-ceremonia {
+      background-color: #F2F4EF;
+      border: 1px solid #E2E7DC;
+    }
+
+    .block-ceremonia .icon-wrapper {
+      background-color: #E2E8D9;
+      color: var(--verde-monograma);
+    }
+
+    .block-ceremonia h2 {
+      color: var(--verde-monograma);
+    }
+
+    .block-ceremonia .btn-maps {
+      background-color: #FFFFFF;
+      color: var(--verde-monograma);
+      border: 1px solid #D2DC8;
+    }
+
+    .block-ceremonia .btn-maps:hover {
+      background-color: var(--verde-monograma);
+      color: #FFFFFF;
+    }
+
+    /* BLOQUE 4: Recepción (Tonalidad Terracota / Salmón Suave) */
+    .block-recepcion {
+      background-color: #FAF4F0;
+      border: 1px solid #F0E2D9;
+    }
+
+    .block-recepcion .icon-wrapper {
+      background-color: #F5E5DC;
+      color: var(--terracota);
+    }
+
+    .block-recepcion h2 {
+      color: var(--terracota);
+    }
+
+    .block-recepcion .btn-maps {
+      background-color: #FFFFFF;
+      color: var(--terracota);
+      border: 1px solid #EBD5C8;
+    }
+
+    .block-recepcion .btn-maps:hover {
+      background-color: var(--terracota);
+      color: #FFFFFF;
+    }
+
+    /* BLOQUE 5: Cómo Llegar (Tonalidad Crema Cálido) */
+    .block-llegar {
+      background-color: #FBF8F1;
+      border: 1px solid #EFE8DA;
+    }
+
+    .block-llegar .icon-wrapper {
+      background-color: #F3EBDC;
+      color: var(--verde-monograma);
+    }
+
+    .block-llegar h2 {
+      color: var(--verde-monograma);
+    }
+
+    .block-llegar p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--texto-oscuro);
+      margin-bottom: 22px;
+      max-width: 480px;
+    }
+
+    .btn-llegar {
+      display: inline-block;
+      padding: 14px 30px;
+      background-color: var(--verde-boton);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .btn-llegar:hover {
+      background-color: var(--verde-boton-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Enlace Volver */
+    .back-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: var(--texto-oscuro);
+      font-size: 0.8rem;
+      text-decoration: none;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+      text-align: center;
+    }
+
+    .back-link:hover {
+      color: var(--verde-monograma);
+    }
+
+    /* Pie de página */
+    footer {
+      margin-top: 40px;
+      font-size: 0.75rem;
+      color: var(--texto-mutado);
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .container { gap: 20px; }
+      .block-card, .block-story { padding: 30px 20px; }
+      .block-header-quote { padding: 18px 20px; }
+      .block-header-quote .banner-badge { font-size: 0.8rem; letter-spacing: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- BLOQUE 1: Cita / Banner enmarcado -->
+    <div class="block-header-quote">
+      <span class="banner-badge">E L &nbsp; L U G A R</span>
+    </div>
+
+    <!-- BLOQUE 2: Historia del lugar -->
+    <section class="block-story">
+      <p>
+        Un encuentro entre un santandereano y una guajira que, después de tanto buscar, encontraron en Barichara el escenario perfecto para cumplir su boda soñada con un mood íntimo, familiar y sencillo, <em>al estilo boda de Cristiano & Georgina</em>.
+      </p>
+    </section>
+
+    <!-- BLOQUE 3: Ceremonia -->
+    <section class="block-card block-ceremonia">
+      <div class="icon-wrapper">
+        <!-- SVG Iglesia -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v4M10 4h4M4 22V10l8-5 8 5v12H4z"/>
+          <path d="M12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+          <path d="M10 22v-5a2 2 0 0 1 4 0v5"/>
+        </svg>
+      </div>
+      <h2>Ceremonia</h2>
+      <p class="place-name">Parroquia de la Inmaculada Concepción</p>
+      <p class="event-info">Barichara, Santander</p>
+      
+      <a href="https://share.google/xAYRg7AJiyzUke6z2" target="_blank" class="btn-maps">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Cl. 5 #6-71, Barichara, Santander
+      </a>
+
+      <p class="event-info" style="margin-bottom: 0;">
+        <strong>Fecha:</strong> 12 - Desembre - 2026 &nbsp;|&nbsp; <strong>Hora:</strong> 11:00 am
+      </p>
+    </section>
+
+    <!-- BLOQUE 4: Recepción -->
+    <section class="block-card block-recepcion">
+      <div class="icon-wrapper">
+        <!-- SVG Fiesta / Copas brindis -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 22h8M12 15v7M7 3l5 7 5-7M5 3h14"/>
+          <path d="M16 8a4 4 0 0 1-8 0"/>
+        </svg>
+      </div>
+      <h2>Recepción</h2>
+      <p class="place-name">Casa Azul</p>
+      <p class="event-info">Barichara, Santander</p>
+      
+      <a href="https://share.google/Zs5QcI0Anb59bUCsD" target="_blank" class="btn-maps">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Cra. 7 #3-65, Barichara, Santander
+      </a>
+    </section>
+
+    <!-- BLOQUE 5: Cómo llegar -->
+    <section class="block-card block-llegar">
+      <div class="icon-wrapper">
+        <!-- SVG Mapa con pin -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
+          <line x1="8" y1="2" x2="8" y2="18"/>
+          <line x1="16" y1="6" x2="16" y2="22"/>
+        </svg>
+      </div>
+      <h2>Cómo llegar</h2>
+      <p>
+        Como son muchos los que cruzamos el mapa para estar con nosotros, aquí les dejamos las opciones para llegar.
+      </p>
+
+      <a href="./comollegar.html" class="btn-llegar">¿CÓMO LLEGAR?</a>
+    </section>
+
+    <!-- Volver a la invitación -->
+    <div style="text-align: center;">
+      <a href="./bienvenida.html" class="back-link">← Volver a la invitación</a>
+    </div>
+
+    <!-- Pie de página -->
+    <footer>
+      Derechos reservados ® Keila & Jorge
+    </footer>
+
+  </div>
+
+</body>
+</html>
