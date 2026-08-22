@@ -5,20 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Boda Keila & Jorge</title>
   
-  <!-- Favicon para la pestaña del navegador -->
   <link rel="icon" type="image/png" href="./logokj.png">
-
-  <!-- Fuentes Elegantes -->
+  
+  <!-- Fuentes Elegantes: Bodoni Moda (K&J), Alex Brush (Barichara cursiva), Montserrat, Cormorant Garamond -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --verde-monograma: #4B5A3B;
+      --verde-monograma: #4B5238; /* Verde oliva idéntico a la imagen */
       --verde-boton: #9B9A79;
-      --verde-boton-hover: #4B5A3B;
-      --terracota-fecha: #C57D5C;
+      --verde-boton-hover: #4B5238;
+      --terracota-fecha: #4B5238; /* Mantenemos consistencia con el todo verde oliva o terracota */
       --crema-fondo: #FDFBF7;
       --texto-oscuro: #3A3A3A;
     }
@@ -33,85 +32,422 @@
       background-color: var(--crema-fondo);
       font-family: 'Montserrat', sans-serif;
       color: var(--texto-oscuro);
+      line-height: 1.6;
+    }
+
+    /* 1. BANNER SUPERIOR PRINCIPAL */
+    .hero-banner {
+      position: relative;
+      width: 100%;
+      min-height: 580px;
+      background-image: url('./banner.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
       display: flex;
       flex-direction: column;
+      align-items: center;
+    }
+
+    /* Monograma K & J con Bodoni Moda */
+    .hero-initials {
+      font-family: 'Bodoni Moda', serif;
+      font-size: 4.2rem;
+      font-weight: 400;
+      color: var(--verde-monograma);
+      letter-spacing: 12px;
+      line-height: 1;
+      margin-bottom: 18px;
+    }
+
+    /* Fecha limpia */
+    .hero-date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--verde-monograma);
+      letter-spacing: 6px;
+      margin-bottom: 14px;
+    }
+
+    /* Barichara en caligrafía cursiva */
+    .hero-location-title {
+      font-family: 'Alex Brush', cursive;
+      font-size: 3.2rem;
+      font-weight: 400;
+      color: var(--verde-monograma);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    /* Subtítulo Santander Colombia */
+    .hero-location-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 4px;
+      color: #555555;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* Línea vertical decorativa */
+    .hero-divider {
+      width: 1px;
+      height: 35px;
+      background-color: var(--verde-monograma);
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+
+    /* Tagline */
+    .hero-tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      color: var(--texto-oscuro);
+      text-transform: uppercase;
+    }
+
+    /* 2. CARRUSEL + MENSAJE */
+    .split-section {
+      display: flex;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
-      text-align: center;
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 20px;
+      gap: 50px;
     }
 
-    .card {
-      background-color: #FFFFFF;
-      padding: 50px 30px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-      max-width: 480px;
+    .carousel-container {
+      position: relative;
       width: 100%;
+      max-width: 460px;
+      height: 480px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+    }
+
+    .text-container {
+      flex: 1;
+      text-align: left;
+    }
+
+    .text-container h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      color: var(--verde-monograma);
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    .text-container p {
+      font-size: 0.95rem;
+      color: #4A4A4A;
+      margin-bottom: 16px;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .highlight-box {
+      margin-top: 25px;
+      padding: 18px 22px;
+      background-color: rgba(75, 90, 59, 0.08);
+      border-left: 3px solid var(--verde-monograma);
+      border-radius: 0 6px 6px 0;
+    }
+
+    .highlight-box p {
+      margin-bottom: 0;
+      font-style: italic;
+      color: var(--verde-monograma);
+      font-size: 0.9rem;
+    }
+
+    /* 3. GRID 4 BOTONES CON IMAGEN */
+    .grid-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 25px;
+      max-width: 850px;
+      margin: 70px auto;
+      padding: 0 20px;
+    }
+
+    .btn-item {
       display: flex;
       flex-direction: column;
       align-items: center;
+      text-decoration: none;
+      transition: transform 0.3s ease;
     }
 
-    .logo-img {
-      max-width: 220px;
-      height: auto;
-      margin-bottom: 25px;
+    .btn-item img {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 12px;
+      border: 2px solid var(--verde-monograma);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
     }
 
-    .title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      color: var(--verde-monograma);
-      margin-bottom: 10px;
-      font-weight: 600;
-      letter-spacing: 1px;
-    }
-
-    .subtitle {
-      font-size: 0.95rem;
-      color: var(--texto-oscuro);
-      margin-bottom: 30px;
-      line-height: 1.5;
-      font-weight: 300;
-    }
-
-    .btn-enter {
+    .btn-style {
       display: inline-block;
-      padding: 14px 32px;
+      padding: 12px 24px;
       background-color: var(--verde-boton);
       color: #FFFFFF;
-      text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       font-weight: 500;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       border-radius: 6px;
-      transition: background-color 0.3s ease, transform 0.2s ease;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
     }
 
-    .btn-enter:hover {
+    .btn-item:hover .btn-style,
+    .btn-style:hover {
       background-color: var(--verde-boton-hover);
       transform: translateY(-2px);
     }
 
+    /* 4. SECCIÓN PLANNING */
+    .planning-section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .planning-section img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+
+    /* 5. CONTEO REGRESIVO + BOTÓN */
+    .countdown-section {
+      text-align: center;
+      padding: 70px 20px;
+      background: rgba(75, 90, 59, 0.05);
+      margin-top: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .countdown-section h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.9rem;
+      color: var(--verde-monograma);
+      margin-bottom: 35px;
+      font-weight: 500;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 35px;
+      margin-bottom: 40px;
+    }
+
+    .time-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .number {
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--verde-monograma);
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--texto-oscuro);
+    }
+
+    .btn-confirm {
+      padding: 14px 32px;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+    }
+
+    /* RESPONSIVO */
     @media (max-width: 768px) {
-      .card { padding: 40px 20px; }
-      .logo-img { max-width: 180px; }
-      .title { font-size: 1.75rem; }
+      .hero-banner { min-height: 480px; }
+      .hero-initials { font-size: 3.2rem; }
+      .hero-location-title { font-size: 2.5rem; }
+      .split-section { flex-direction: column; gap: 30px; margin: 40px auto; }
+      .carousel-container { max-width: 100%; height: 350px; }
+      .text-container { text-align: center; }
+      .highlight-box { border-left: none; border-top: 3px solid var(--verde-monograma); border-radius: 0 0 6px 6px; }
+      .countdown { gap: 20px; }
+      .number { font-size: 2.1rem; }
     }
   </style>
 </head>
 <body>
 
-  <main class="card">
-    <img src="./logokj.png" alt="Monograma Keila y Jorge" class="logo-img">
-    <h1 class="title">NUESTRA BODA</h1>
-    <p class="subtitle">Nos encantaría compartir este día tan especial contigo.</p>
-    <a href="./bienvenida.html" class="btn-enter">VER INVITACIÓN</a>
+  <!-- 1. BANNER SUPERIOR CON NUEVA TIPOGRAFÍA FIEL A LA IMAGEN -->
+  <header class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-initials">K &amp; J</div>
+      <div class="hero-date">12 · 12 · 2026</div>
+      <div class="hero-location-title">Barichara</div>
+      <div class="hero-location-subtitle">SANTANDER · COLOMBIA</div>
+      <div class="hero-divider"></div>
+      <div class="hero-tagline">NOS VEMOS EN BARICHARA.</div>
+    </div>
+  </header>
+
+  <!-- 2. CARRUSEL + MENSAJE -->
+  <main class="split-section">
+    <div class="carousel-container">
+      <img src="./tarjeta.png" class="carousel-slide active" alt="Foto 1">
+      <img src="./papel.png" class="carousel-slide" alt="Foto 2">
+      <img src="./sello.png" class="carousel-slide" alt="Foto 3">
+    </div>
+
+    <div class="text-container">
+      <h2>NUESTRA HISTORIA</h2>
+      <p>
+        ¡Si estás aquí es porque formas parte fundamental de nuestras vidas! Queremos celebrar la bendición de nuestro amor rodeados de la magia de Barichara y de las personas que más amamos.
+      </p>
+      <p>
+        Hemos preparado cada detalle con mucho cariño para hacer de este fin de semana una experiencia inolvidable llena de momentos especiales, sonrisas y momentos únicos.
+      </p>
+
+      <div class="highlight-box">
+        <p>«El amor no consiste en mirarse el uno al otro, sino en mirar juntos en la misma dirección.»</p>
+      </div>
+    </div>
   </main>
+
+  <!-- 3. GRID 4 BOTONES CON IMAGEN -->
+  <section class="grid-buttons">
+    <a href="#" class="btn-item">
+      <img src="./ubicacion.jpg" alt="Ubicación">
+      <span class="btn-style">UBICACIÓN</span>
+    </a>
+    <a href="#" class="btn-item">
+      <img src="./dress.jpg" alt="Dress Code">
+      <span class="btn-style">DRESS CODE</span>
+    </a>
+    <a href="#" class="btn-item">
+      <img src="./alojamiento.jpg" alt="Alojamiento">
+      <span class="btn-style">ALOJAMIENTO</span>
+    </a>
+    <a href="#" class="btn-item">
+      <img src="./regalo.jpg" alt="Regalo">
+      <span class="btn-style">REGALO</span>
+    </a>
+  </section>
+
+  <!-- 4. PLANNING DEL DÍA -->
+  <section class="planning-section">
+    <img src="./planning.jpg" alt="Planning del Día">
+  </section>
+
+  <!-- 5. CONTEO REGRESIVO + BOTÓN A LA SUBPÁGINA -->
+  <section class="countdown-section">
+    <h3>faltan muy pocos días para celebrar juntos</h3>
+    
+    <div class="countdown">
+      <div class="time-block">
+        <span class="number" id="days">0</span>
+        <span class="label">Días</span>
+      </div>
+      <div class="time-block">
+        <span class="number" id="hours">0</span>
+        <span class="label">Horas</span>
+      </div>
+      <div class="time-block">
+        <span class="number" id="minutes">0</span>
+        <span class="label">Minutos</span>
+      </div>
+      <div class="time-block">
+        <span class="number" id="seconds">0</span>
+        <span class="label">Segundos</span>
+      </div>
+    </div>
+
+    <!-- BOTÓN QUE DIRIGE A CONFIRMACION.HTML -->
+    <a href="./confirmacion.html" class="btn-style btn-confirm">CONFIRMAR ASISTENCIA</a>
+  </section>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Carrusel
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+
+    function nextSlide() {
+      if (slides.length <= 1) return;
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    setInterval(nextSlide, 4000);
+
+    // Conteo Regresivo
+    const weddingDate = new Date("Dec 12, 2026 00:00:00").getTime();
+    function updateTimer() {
+      const now = new Date().getTime();
+      const diff = weddingDate - now;
+
+      if (diff > 0) {
+        document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+      }
+    }
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
 
 </body>
 </html>
