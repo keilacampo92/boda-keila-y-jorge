@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Confirmación de Asistencia - Boda Keila & Jorge</title>
+  
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="./logokj.png">
   
+  <!-- Fuentes Elegantes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -39,7 +42,7 @@
 
     .form-card {
       background: #FFFFFF;
-      max-width: 500px;
+      max-width: 480px;
       width: 100%;
       padding: 40px 30px;
       border-radius: 12px;
@@ -115,20 +118,25 @@
       background-color: var(--verde-boton-hover);
     }
 
+    .btn-submit:disabled {
+      background-color: #CCCCCC;
+      cursor: not-allowed;
+    }
+
     .status-message {
       margin-top: 18px;
       font-size: 0.85rem;
       display: none;
+      line-height: 1.4;
     }
 
     .status-message.error {
       color: var(--error-color);
-      display: block;
     }
 
     .status-message.success {
       color: var(--verde-monograma);
-      display: block;
+      font-weight: 500;
     }
 
     .back-link {
@@ -178,37 +186,47 @@
   </div>
 
   <script>
-    // REEMPLAZA ESTA URL CON TU SCRIPT DE GOOGLE SHEETS O SERVICIO DE FORMULARIO
-    const scriptURL = 'TU_URL_DE_GOOGLE_SCRIPT_O_BACKEND';
+    // URL DE TU GOOGLE APPS SCRIPT
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxVmTwN80-AoJLXJhm-uf_Am1emNEWMb4xikbgxsY8Mv8Dcwhw7W1T_2mNix2hggvO6/exec';
 
     const form = document.getElementById('rsvp-form');
     const statusMsg = document.getElementById('status-msg');
-    const btnText = document.getElementById('btn-text');
+    const btnSubmit = document.getElementById('btn-text');
 
     form.addEventListener('submit', e => {
       e.preventDefault();
-      
-      if (!scriptURL || scriptURL === 'https://script.google.com/macros/s/AKfycbz3ZPHDxZW1E7w379nfsuoyeWRxSVARC9Mg2GdJCpJOhzL1xfD5CQiit4MItwdqIr3N/exec') {
-        statusMsg.className = 'status-message error';
-        statusMsg.innerText = 'Falta configurar la URL de recepción del formulario.';
-        return;
-      }
 
-      btnText.innerText = 'ENVIANDO...';
+      btnSubmit.innerText = 'ENVIANDO...';
+      btnSubmit.disabled = true;
       statusMsg.style.display = 'none';
 
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-          btnText.innerText = 'ENVIAR CONFIRMACIÓN';
-          statusMsg.className = 'status-message success';
-          statusMsg.innerText = '¡Gracias por confirmar tu asistencia!';
-          form.reset();
-        })
-        .catch(error => {
-          btnText.innerText = 'ENVIAR CONFIRMACIÓN';
-          statusMsg.className = 'status-message error';
-          statusMsg.innerText = 'Hubo un error al enviar. Por favor intenta de nuevo.';
-        });
+      const formData = new FormData(form);
+      const params = new URLSearchParams(formData);
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: params.toString()
+      })
+      .then(() => {
+        btnSubmit.innerText = 'ENVIAR CONFIRMACIÓN';
+        btnSubmit.disabled = false;
+        statusMsg.className = 'status-message success';
+        statusMsg.innerText = '¡Muchas gracias! Tu confirmación se ha registrado correctamente.';
+        statusMsg.style.display = 'block';
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        btnSubmit.innerText = 'ENVIAR CONFIRMACIÓN';
+        btnSubmit.disabled = false;
+        statusMsg.className = 'status-message error';
+        statusMsg.innerText = 'Hubo un error al enviar. Por favor intenta de nuevo.';
+        statusMsg.style.display = 'block';
+      });
     });
   </script>
 
