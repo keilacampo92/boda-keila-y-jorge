@@ -5,10 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Confirmación de Asistencia - Boda Keila & Jorge</title>
   
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="./logokj.png">
   
-  <!-- Fuentes Elegantes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -86,11 +84,12 @@
       transition: border-color 0.3s ease;
     }
 
-    input[type="text"]:focus,
-    select:focus,
-    textarea:focus {
-      border-color: var(--verde-monograma);
-      background-color: #FFFFFF;
+    input[type="text"]:disabled,
+    select:disabled,
+    textarea:disabled {
+      background-color: #F0F0F0;
+      color: #888888;
+      cursor: not-allowed;
     }
 
     textarea {
@@ -114,7 +113,7 @@
       margin-top: 10px;
     }
 
-    .btn-submit:hover {
+    .btn-submit:hover:not(:disabled) {
       background-color: var(--verde-boton-hover);
     }
 
@@ -124,12 +123,16 @@
     }
 
     .status-message {
-      margin-top: 18px;
-      font-size: 0.85rem;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 6px;
+      background-color: rgba(75, 90, 59, 0.1);
+      border: 1px solid var(--verde-monograma);
+      font-size: 0.88rem;
       display: none;
-      line-height: 1.4;
+      line-height: 1.5;
       color: var(--verde-monograma);
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .back-link {
@@ -145,7 +148,6 @@
       color: var(--verde-monograma);
     }
 
-    /* Iframe oculto para procesar el envío sin recargar ni sufrir por CORS */
     #hidden_iframe {
       display: none;
     }
@@ -156,7 +158,6 @@
   <div class="form-card">
     <img src="./logokj.png" alt="Keila & Jorge" class="logo-img">
 
-    <!-- Formulario nativo con target hacia el iframe oculto -->
     <form id="rsvp-form" action="https://script.google.com/macros/s/AKfycbxVmTwN80-AoJLXJhm-uf_Am1emNEWMb4xikbgxsY8Mv8Dcwhw7W1T_2mNix2hggvO6/exec" method="POST" target="hidden_iframe">
       
       <div class="form-group">
@@ -180,14 +181,13 @@
       <button type="submit" class="btn-submit" id="btn-text">ENVIAR CONFIRMACIÓN</button>
       
       <div id="status-msg" class="status-message">
-        ¡Muchas gracias! Tu confirmación se ha registrado correctamente.
+        ¡Muchas gracias! Tu respuesta ya ha sido registrada.
       </div>
     </form>
 
     <a href="./bienvenida.html" class="back-link">&larr; Volver a la invitación</a>
   </div>
 
-  <!-- Iframe oculto -->
   <iframe name="hidden_iframe" id="hidden_iframe"></iframe>
 
   <script>
@@ -196,6 +196,20 @@
     const btnSubmit = document.getElementById('btn-text');
     const statusMsg = document.getElementById('status-msg');
     const iframe = document.getElementById('hidden_iframe');
+    const inputs = form.querySelectorAll('input, select, textarea');
+
+    // Función para bloquear el formulario
+    function disableForm() {
+      inputs.forEach(input => input.disabled = true);
+      btnSubmit.innerText = 'CONFIRMACIÓN ENVIADA';
+      btnSubmit.disabled = true;
+      statusMsg.style.display = 'block';
+    }
+
+    // Comprobar si la persona ya confirmó previamente en este navegador
+    if (localStorage.getItem('boda_asistencia_enviada') === 'true') {
+      disableForm();
+    }
 
     form.addEventListener('submit', function() {
       submitted = true;
@@ -205,10 +219,9 @@
 
     iframe.addEventListener('load', function() {
       if (submitted) {
-        btnSubmit.innerText = 'ENVIAR CONFIRMACIÓN';
-        btnSubmit.disabled = false;
-        statusMsg.style.display = 'block';
-        form.reset();
+        // Guardar marca local para evitar reenvíos
+        localStorage.setItem('boda_asistencia_enviada', 'true');
+        disableForm();
         submitted = false;
       }
     });
