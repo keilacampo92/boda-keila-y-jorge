@@ -238,7 +238,7 @@
       transform: translateY(-2px);
     }
 
-    /* 4. SECCIÓN PLANNING */
+    /* 4. SECCIÓN PLANNING DEL DÍA */
     .planning-section {
       max-width: 900px;
       margin: 60px auto;
@@ -249,6 +249,7 @@
     .planning-section img {
       width: 100%;
       height: auto;
+      display: block;
       border-radius: 8px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     }
@@ -318,6 +319,17 @@
       .highlight-box { border-left: none; border-top: 3px solid var(--verde-monograma); border-radius: 0 0 6px 6px; }
       .countdown { gap: 20px; }
       .number { font-size: 2.1rem; }
+
+      /* Ajustes para que la imagen ocupe pantalla completa de lado a lado en móvil */
+      .planning-section {
+        padding: 0;
+        margin: 40px 0;
+        width: 100%;
+      }
+      .planning-section img {
+        border-radius: 0;
+        box-shadow: none;
+      }
     }
   </style>
 </head>
@@ -378,12 +390,12 @@
     </a>
   </section>
 
-  <!-- 4. PLANNING DEL DÍA -->
+  <!-- 4. PLANNING DEL DÍA (Plandeldia.jpg) -->
   <section class="planning-section">
     <img src="./Plandeldia.jpg" alt="Planning del Día">
   </section>
 
-  <!-- 5. CONTEO REGRESIVO + BOTÓN A LA SUBPÁGINA -->
+  <!-- 5. CONTEO REGRESIVO + BOTÓN -->
   <section class="countdown-section">
     <h3>faltan muy pocos días para celebrar juntos</h3>
     
