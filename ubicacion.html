@@ -50,6 +50,24 @@
       gap: 25px;
     }
 
+    /* LOGO SUPERIOR */
+    .header-logo {
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .header-logo img {
+      max-width: 90px; /* Tamaño discreto y elegante */
+      height: auto;
+      display: inline-block;
+      opacity: 0.9;
+      transition: transform 0.3s ease;
+    }
+
+    .header-logo img:hover {
+      transform: scale(1.05);
+    }
+
     /* BLOQUE 1: Cita enmarcada con barra terracota */
     .block-header-quote {
       background-color: #F4EFEA;
@@ -289,12 +307,20 @@
       .block-card, .block-story { padding: 30px 20px; }
       .block-header-quote { padding: 18px 20px; }
       .block-header-quote .banner-badge { font-size: 0.8rem; letter-spacing: 4px; }
+      .header-logo img { max-width: 75px; }
     }
   </style>
 </head>
 <body>
 
   <div class="container">
+
+    <!-- LOGO EN LA PARTE SUPERIOR -->
+    <div class="header-logo">
+      <a href="./bienvenida.html">
+        <img src="./logokj.png" alt="Logo Keila & Jorge">
+      </a>
+    </div>
 
     <!-- BLOQUE 1: Cita / Banner enmarcado -->
     <div class="block-header-quote">
