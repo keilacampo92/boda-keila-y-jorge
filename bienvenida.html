@@ -8,7 +8,7 @@
   <!-- Fuentes Elegantes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -44,7 +44,7 @@
       background-repeat: no-repeat;
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* Subimos el contenido hacia la zona clara del cielo */
+      align-items: flex-start;
       text-align: center;
       padding: 30px 20px 60px 20px;
     }
@@ -58,9 +58,10 @@
       align-items: center;
     }
 
+    /* CAMBIO 1: Nueva fuente para el monograma K & J */
     .hero-initials {
-      font-family: 'Cinzel', serif;
-      font-size: 3.5rem;
+      font-family: 'Bodoni Moda', serif;
+      font-size: 3.8rem;
       font-weight: 500;
       color: var(--verde-monograma);
       letter-spacing: 6px;
@@ -79,11 +80,11 @@
       text-shadow: 0 1px 3px rgba(253, 251, 247, 0.8);
     }
 
+    /* CAMBIO 2: Nueva fuente caligráfica cursiva para Barichara */
     .hero-location-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 2.8rem;
-      font-weight: 500;
+      font-family: 'Alex Brush', cursive;
+      font-size: 3.2rem;
+      font-weight: 400;
       color: var(--verde-monograma);
       line-height: 1.1;
       margin-bottom: 4px;
@@ -116,7 +117,7 @@
       letter-spacing: 3px;
       color: var(--texto-oscuro);
       text-transform: uppercase;
-      background: rgba(253, 251, 247, 0.6); /* Fondo translúcido sutil para legibilidad */
+      background: rgba(253, 251, 247, 0.6);
       padding: 4px 12px;
       border-radius: 20px;
       backdrop-filter: blur(2px);
@@ -324,9 +325,9 @@
         min-height: 460px; 
         padding-top: 25px;
       }
-      .hero-initials { font-size: 2.6rem; }
-      .hero-location-title { font-size: 2.0rem; }
-      .hero-divider { margin-top: 25px; } /* Espacio extra en móviles para separar la frase */
+      .hero-initials { font-size: 2.8rem; }
+      .hero-location-title { font-size: 2.6rem; }
+      .hero-divider { margin-top: 25px; }
       .split-section { flex-direction: column; gap: 30px; margin: 40px auto; }
       .carousel-container { max-width: 100%; height: 350px; }
       .text-container { text-align: center; }
