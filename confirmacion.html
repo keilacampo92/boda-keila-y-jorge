@@ -80,8 +80,7 @@
 
     input[type="tel"],
     input[type="text"],
-    select,
-    textarea {
+    select {
       width: 100%;
       padding: 12px 15px;
       font-family: 'Montserrat', sans-serif;
@@ -93,7 +92,7 @@
       transition: border-color 0.3s ease;
     }
 
-    input:focus, select:focus, textarea:focus {
+    input:focus, select:focus {
       outline: none;
       border-color: var(--verde-monograma);
       background-color: #FFF;
@@ -130,23 +129,25 @@
       letter-spacing: 1px;
     }
 
-    /* Mensajes de feedback */
+    /* Mensajes de alerta */
     .alert {
-      padding: 12px 15px;
+      padding: 14px 18px;
       border-radius: 6px;
       font-size: 0.85rem;
       margin-bottom: 20px;
       display: none;
+      line-height: 1.5;
+      text-align: center;
     }
     .alert-error {
       background-color: #F8D7DA;
       color: #721C24;
       border: 1px solid #F5C6CB;
     }
-    .alert-info {
-      background-color: #E2E3E5;
-      color: #383D41;
-      border: 1px solid #D6D8DB;
+    .alert-warning {
+      background-color: #FFF3CD;
+      color: #856404;
+      border: 1px solid #FFEEBA;
     }
 
     /* Paso 2 oculto inicialmente */
@@ -215,7 +216,7 @@
       </form>
     </div>
 
-    <!-- PASO 2: FORMULARIO DINÁMICO (se activa tras encontrar el teléfono) -->
+    <!-- PASO 2: FORMULARIO DINÁMICO -->
     <div id="step-2">
       <div class="welcome-card">
         <h3 id="guest-name">Hola</h3>
@@ -226,7 +227,7 @@
         <div class="form-group">
           <label for="attendees-count">¿Cuántas personas asistirán?</label>
           <select id="attendees-count" required>
-            <!-- Se llena dinámicamente con JS según los cupos -->
+            <!-- Opciones dinámicas -->
           </select>
         </div>
 
@@ -254,8 +255,8 @@
   <a href="./bienvenida.html" class="back-home">NOS VEMOS EN BARICHARA</a>
 
   <script>
-    // ⚠️ REEMPLAZA ESTA URL CON TU URL DE GOOGLE APPS SCRIPT
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby6mtzXB3YKtk5xwf-ZhHZpQgCJw8iQZ2iQh0DzLXZjMq-ju9sBISrwlfe-_f5fgDVLPA/exec";
+    // ⚠️ COLOCA AQUÍ TU URL DE GOOGLE APPS SCRIPT
+    const SCRIPT_URL = "Phttps://script.google.com/macros/s/AKfycbxDWBKf1952CZE10v3SYUHlb93sMuxirs_mOpv8a-VnDJKwbiiANC5-xNeSU_pFjBmO/exec";
 
     let guestData = null;
 
@@ -297,6 +298,15 @@
         const response = await fetch(`${SCRIPT_URL}?action=buscar&telefono=${encodeURIComponent(phoneInput)}`);
         const data = await response.json();
 
+        // 1. Si ya está registrado
+        if (data.yaRegistrado) {
+          showAlert('Ya estás registrado y confirmado, si deseas hacer alguna modificación debes comunicarte con los novios.', 'warning');
+          btnSearch.innerText = 'BUSCAR INVITACIÓN';
+          btnSearch.disabled = false;
+          return;
+        }
+
+        // 2. Si existe en la lista de invitados
         if (data.encontrado) {
           guestData = {
             telefono: phoneInput,
@@ -304,14 +314,14 @@
             cupos: parseInt(data.cupos)
           };
 
-          // Cargar datos en el Paso 2
+          // Saludar
           document.getElementById('guest-name').innerText = `¡Hola, ${guestData.nombre}!`;
           document.getElementById('guest-quota-text').innerText = 
             guestData.cupos === 1 
               ? 'Tienes 1 pase reservado para ti.' 
               : `Tienes hasta ${guestData.cupos} pases reservados.`;
 
-          // Generar desplegable con el límite de cupos
+          // Generar desplegable con cupos permitidos
           selectAttendees.innerHTML = '';
           for (let i = 1; i <= guestData.cupos; i++) {
             const option = document.createElement('option');
@@ -320,13 +330,13 @@
             selectAttendees.appendChild(option);
           }
 
-          // Mostrar/Ocultar campo acompañantes según la selección inicial
           toggleCompanionsField();
 
           step1.style.display = 'none';
           step2.style.display = 'block';
         } else {
-          showAlert('No encontramos este número en la lista de invitados. Verifica que sea el mismo número al que te enviamos la invitación o contáctanos directamente.');
+          // 3. No registrado en la base de datos
+          showAlert('Este número no está registrado en nuestra base de datos, por favor intenta con el número de tu acompañante.');
         }
       } catch (err) {
         console.error(err);
@@ -337,7 +347,6 @@
       }
     });
 
-    // Escuchar cambio en desplegable para pedir nombres de acompañantes
     selectAttendees.addEventListener('change', toggleCompanionsField);
 
     function toggleCompanionsField() {
@@ -371,22 +380,19 @@
       try {
         await fetch(SCRIPT_URL, {
           method: 'POST',
-          mode: 'no-cors', // Evita bloqueos de CORS con Apps Script
+          mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
 
-        // Mostrar éxito
+        // Pantalla final con el mensaje exacto
         step2.innerHTML = `
           <div style="text-align:center; padding: 20px 0;">
-            <h2 style="font-family:'Cormorant Garamond', serif; font-size:2.2rem; color:var(--verde-monograma); margin-bottom:15px;">
-              ¡Gracias por confirmar!
+            <h2 style="font-family:'Alex Brush', cursive; font-size:3.5rem; color:var(--verde-monograma); margin-bottom:10px;">
+              ¡Gracias!
             </h2>
-            <p style="font-size:0.95rem; color:#555; line-height:1.7;">
-              Hemos guardado tu confirmación para <strong>${payload.asistentes} persona(s)</strong>.
-            </p>
-            <p style="font-size:0.95rem; color:#555; margin-top:10px;">
-              ¡Nos vemos muy pronto en Barichara!
+            <p style="font-family:'Cormorant Garamond', serif; font-size:1.6rem; color:var(--terracota-fecha); font-style:italic; line-height:1.5;">
+              Gracias por acompañarnos en este día
             </p>
           </div>
         `;
