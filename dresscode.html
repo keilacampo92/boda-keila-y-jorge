@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Código de Vestimenta - Boda Keila &amp; Jorge</title>
+  
+  <!-- Favicon para la pestaña del navegador -->
+  <link rel="shortcut icon" href="logokyj.png" type="image/png">
 
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --verde-monograma: #4B5A3B;
+      --verde-boton: #9B9A79;
+      --verde-boton-hover: #4B5A3B;
+      --terracota-fecha: #C57D5C;
+      --crema-fondo: #FDFBF7;
+      --texto-oscuro: #3A3A3A;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--crema-fondo);
+      font-family: 'Montserrat', sans-serif;
+      color: var(--texto-oscuro);
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      padding: 40px 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border: 1px solid rgba(75, 90, 59, 0.15);
+    }
+
+    .btn-back {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--verde-monograma);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    .header-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .header-logo {
+      max-width: 140px;
+      height: auto;
+      margin: 0 auto 15px auto;
+      display: block;
+    }
+
+    .header-title h1 {
+      font-family: 'Bodoni Moda', serif;
+      font-size: 2.3rem;
+      color: var(--verde-monograma);
+      margin-bottom: 5px;
+    }
+
+    .header-title p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--terracota-fecha);
+    }
+
+    .section-block {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-family: 'Bodoni Moda', serif;
+      font-size: 1.4rem;
+      color: var(--verde-monograma);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .dresscode-img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      margin-top: 10px;
+    }
+
+    .note-box {
+      background-color: rgba(75, 90, 59, 0.05);
+      border-left: 3px solid var(--verde-monograma);
+      padding: 15px 20px;
+      border-radius: 0 8px 8px 0;
+      margin-top: 20px;
+      text-align: left;
+      font-size: 0.88rem;
+      color: var(--texto-oscuro);
+    }
+
+    .back-home {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      color: var(--verde-monograma);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 30px 15px; }
+      .header-title h1 { font-size: 1.8rem; }
+      .header-logo { max-width: 110px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <a href="./bienvenida.html" class="btn-back">← VOLVER A LA INVITACIÓN</a>
+
+    <div class="header-title">
+      <!-- Logo KYJ -->
+      <img src="logokyj.png" alt="Logo Keila y Jorge" class="header-logo">
+      <h1>Código de Vestimenta</h1>
+      <p>Formal - Cálido Barichara</p>
+    </div>
+
+    <!-- SECCIÓN 1: GUÍA DE INVITADOS Y PALETA SUGERIDA -->
+    <div class="section-block">
+      <h2 class="section-title">Guía de Estilo &amp; Tonos Sugeridos</h2>
+      <img src="dresscode-invitados.jpg" alt="Ejemplos de vestimenta y paleta de colores para invitados" class="dresscode-img">
+    </div>
+
+    <!-- SECCIÓN 2: COLORES RESERVADOS PARA LOS NOVIOS -->
+    <div class="section-block">
+      <h2 class="section-title">Colores Reservados</h2>
+      <img src="colores-reservados.jpg" alt="Colores reservados para los novios" class="dresscode-img">
+      
+      <div class="note-box">
+        <p><strong>A tener en cuenta:</strong> Te pedimos evitar el uso de colores muy vibrantes, neón, estampados demasiado llamativos o el uso de blanco, marfil, beige arena o verde oliva como color principal de tu atuendo.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <a href="./bienvenida.html" class="back-home">NOS VEMOS EN BARICHARA</a>
+
+</body>
+</html>
