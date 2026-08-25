@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirmar Asistencia - Boda Keila &amp; Jorge</title>
+  <title>Confirmar Asistencia</title>
   
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,18 +49,18 @@
       margin-bottom: 30px;
     }
 
+    .header-logo {
+      max-width: 150px;
+      height: auto;
+      margin: 0 auto 15px auto;
+      display: block;
+    }
+
     .header-title h1 {
       font-family: 'Bodoni Moda', serif;
       font-size: 2.5rem;
       color: var(--verde-monograma);
       margin-bottom: 5px;
-    }
-
-    .header-title p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-style: italic;
-      color: var(--terracota-fecha);
     }
 
     .form-group {
@@ -187,6 +187,7 @@
     @media (max-width: 600px) {
       .container { padding: 30px 20px; }
       .header-title h1 { font-size: 2rem; }
+      .header-logo { max-width: 120px; }
     }
   </style>
 </head>
@@ -196,8 +197,9 @@
     <a href="./bienvenida.html" class="btn-back">← VOLVER A LA INVITACIÓN</a>
 
     <div class="header-title">
+      <!-- LOGO EN LA PARTE SUPERIOR -->
+      <img src="logo.png" alt="Logo Monograma" class="header-logo">
       <h1>Confirmar Asistencia</h1>
-      <p>Boda Keila &amp; Jorge</p>
     </div>
 
     <div id="alert-msg" class="alert"></div>
@@ -256,7 +258,7 @@
 
   <script>
     // ⚠️ COLOCA AQUÍ TU URL DE GOOGLE APPS SCRIPT
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwGs7-7FWL3IYVVTXNcZUNGlhRbuJIDaNcBmEz_KTaBnpLpvsmd6SzqaSMUSdpneP0QuA/exec";
+    const SCRIPT_URL = "PEGA_AQUI_TU_URL_DE_GOOGLE_APPS_SCRIPT";
 
     let guestData = null;
 
