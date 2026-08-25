@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirmación de Asistencia - Boda Keila & Jorge</title>
+  <title>Confirmar Asistencia - Boda Keila &amp; Jorge</title>
   
-  <link rel="icon" type="image/png" href="./logokj.png">
-  
+  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --verde-monograma: #4B5A3B;
       --verde-boton: #9B9A79;
       --verde-boton-hover: #4B5A3B;
+      --terracota-fecha: #C57D5C;
       --crema-fondo: #FDFBF7;
       --texto-oscuro: #3A3A3A;
     }
@@ -30,37 +30,47 @@
       background-color: var(--crema-fondo);
       font-family: 'Montserrat', sans-serif;
       color: var(--texto-oscuro);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
+      line-height: 1.6;
+      padding: 40px 20px;
     }
 
-    .form-card {
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
       background: #FFFFFF;
-      max-width: 480px;
-      width: 100%;
       padding: 40px 30px;
       border-radius: 12px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      text-align: center;
+      border: 1px solid rgba(75, 90, 59, 0.15);
     }
 
-    .logo-img {
-      max-width: 220px;
-      height: auto;
-      margin-bottom: 25px;
+    .header-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header-title h1 {
+      font-family: 'Bodoni Moda', serif;
+      font-size: 2.5rem;
+      color: var(--verde-monograma);
+      margin-bottom: 5px;
+    }
+
+    .header-title p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--terracota-fecha);
     }
 
     .form-group {
-      text-align: left;
       margin-bottom: 22px;
+      text-align: left;
     }
 
     label {
       display: block;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 600;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -68,44 +78,39 @@
       margin-bottom: 8px;
     }
 
+    input[type="tel"],
     input[type="text"],
     select,
     textarea {
       width: 100%;
       padding: 12px 15px;
-      border: 1px solid #E0E0E0;
-      border-radius: 6px;
-      background-color: #FBFBFB;
       font-family: 'Montserrat', sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      border: 1px solid #DDD;
+      border-radius: 6px;
+      background-color: #FAFAFA;
       color: var(--texto-oscuro);
-      outline: none;
       transition: border-color 0.3s ease;
     }
 
-    input[type="text"]:focus,
-    select:focus,
-    textarea:focus {
+    input:focus, select:focus, textarea:focus {
+      outline: none;
       border-color: var(--verde-monograma);
-      background-color: #FFFFFF;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 90px;
+      background-color: #FFF;
     }
 
     .btn-submit {
       width: 100%;
       padding: 14px;
       background-color: var(--verde-boton);
-      color: #FFFFFF;
-      border: none;
-      border-radius: 6px;
+      color: #FFF;
+      font-family: 'Montserrat', sans-serif;
       font-size: 0.85rem;
       font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
       transition: background-color 0.3s ease;
       margin-top: 10px;
@@ -115,121 +120,281 @@
       background-color: var(--verde-boton-hover);
     }
 
-    /* MENSAJE DE ÉXITO QUE REEMPLAZA AL FORMULARIO */
-    .success-container {
-      display: none;
-      padding: 20px 10px;
-    }
-
-    .success-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      color: var(--verde-monograma);
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .success-text {
-      font-size: 0.95rem;
-      color: #555555;
-      line-height: 1.6;
-      font-weight: 300;
-      margin-bottom: 20px;
-    }
-
-    .back-link {
+    .btn-back {
       display: inline-block;
-      margin-top: 25px;
-      font-size: 0.8rem;
-      color: var(--texto-oscuro);
+      margin-bottom: 20px;
+      color: var(--verde-monograma);
       text-decoration: none;
-      transition: color 0.3s ease;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 1px;
     }
 
-    .back-link:hover {
+    /* Mensajes de feedback */
+    .alert {
+      padding: 12px 15px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+      display: none;
+    }
+    .alert-error {
+      background-color: #F8D7DA;
+      color: #721C24;
+      border: 1px solid #F5C6CB;
+    }
+    .alert-info {
+      background-color: #E2E3E5;
+      color: #383D41;
+      border: 1px solid #D6D8DB;
+    }
+
+    /* Paso 2 oculto inicialmente */
+    #step-2 {
+      display: none;
+    }
+
+    .welcome-card {
+      background-color: rgba(75, 90, 59, 0.06);
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      border-left: 4px solid var(--verde-monograma);
+    }
+
+    .welcome-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
       color: var(--verde-monograma);
     }
 
-    #hidden_iframe {
-      display: none;
+    .welcome-card p {
+      font-size: 0.85rem;
+      color: var(--texto-oscuro);
+    }
+
+    .back-home {
+      display: block;
+      text-align: center;
+      margin-top: 25px;
+      color: var(--verde-monograma);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 30px 20px; }
+      .header-title h1 { font-size: 2rem; }
     }
   </style>
 </head>
 <body>
 
-  <div class="form-card">
-    <img src="./logokj.png" alt="Keila & Jorge" class="logo-img">
+  <div class="container">
+    <a href="./bienvenida.html" class="btn-back">← VOLVER A LA INVITACIÓN</a>
 
-    <!-- FORMULARIO DE CONFIRMACIÓN -->
-    <form id="rsvp-form" action="https://script.google.com/macros/s/AKfycbxVmTwN80-AoJLXJhm-uf_Am1emNEWMb4xikbgxsY8Mv8Dcwhw7W1T_2mNix2hggvO6/exec" method="POST" target="hidden_iframe">
-      
-      <div class="form-group">
-        <label for="nombre">NOMBRE COMPLETO</label>
-        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre y apellido" required>
-      </div>
-
-      <div class="form-group">
-        <label for="asistencia">¿NOS ACOMPAÑARÁS?</label>
-        <select id="asistencia" name="asistencia" required>
-          <option value="Sí, ¡allí estaré!">Sí, ¡allí estaré!</option>
-          <option value="Lo siento, no podré asistir">Lo siento, no podré asistir</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="restricciones">RESTRICCIONES ALIMENTARIAS O MENSAJE ESPECIAL</label>
-        <textarea id="restricciones" name="restricciones" placeholder="Alergias, vegetariano, vegano o un mensaje para los novios..."></textarea>
-      </div>
-
-      <button type="submit" class="btn-submit" id="btn-text">ENVIAR CONFIRMACIÓN</button>
-    </form>
-
-    <!-- MENSAJE DE ÉXITO QUE APARECE AL ENVIAR -->
-    <div id="success-box" class="success-container">
-      <h2 class="success-title">¡Respuesta registrada!</h2>
-      <p class="success-text">Muchas gracias por confirmar. Tu respuesta ha sido enviada con éxito y los novios ya cuentan con tu información.</p>
+    <div class="header-title">
+      <h1>Confirmar Asistencia</h1>
+      <p>Boda Keila &amp; Jorge</p>
     </div>
 
-    <a href="./bienvenida.html" class="back-link">&larr; Volver a la invitación</a>
+    <div id="alert-msg" class="alert"></div>
+
+    <!-- PASO 1: BÚSQUEDA POR TELÉFONO -->
+    <div id="step-1">
+      <form id="form-search">
+        <div class="form-group">
+          <label for="search-phone">Número de Teléfono</label>
+          <input type="tel" id="search-phone" placeholder="Ej: 3001234567" required autocomplete="tel">
+          <small style="font-size:0.75rem; color:#777; margin-top:5px; display:block;">
+            Ingresa el número celular con el que te contactamos.
+          </small>
+        </div>
+        <button type="submit" id="btn-search" class="btn-submit">BUSCAR INVITACIÓN</button>
+      </form>
+    </div>
+
+    <!-- PASO 2: FORMULARIO DINÁMICO (se activa tras encontrar el teléfono) -->
+    <div id="step-2">
+      <div class="welcome-card">
+        <h3 id="guest-name">Hola</h3>
+        <p id="guest-quota-text"></p>
+      </div>
+
+      <form id="form-confirm">
+        <div class="form-group">
+          <label for="attendees-count">¿Cuántas personas asistirán?</label>
+          <select id="attendees-count" required>
+            <!-- Se llena dinámicamente con JS según los cupos -->
+          </select>
+        </div>
+
+        <div class="form-group" id="group-companions" style="display: none;">
+          <label for="companions-names">Nombre(s) de tu(s) acompañante(s)</label>
+          <input type="text" id="companions-names" placeholder="Ej: Juan Pérez">
+        </div>
+
+        <div class="form-group">
+          <label for="dietary">Alergias o Restricciones Alimentarias</label>
+          <input type="text" id="dietary" placeholder="Ej: Vegetariano, alergia a mariscos, ninguno...">
+        </div>
+
+        <div class="form-group">
+          <label for="song">¿Qué canción no puede faltar en la fiesta?</label>
+          <input type="text" id="song" placeholder="Nombre de la canción y artista">
+        </div>
+
+        <button type="submit" id="btn-confirm" class="btn-submit">CONFIRMAR ASISTENCIA</button>
+      </form>
+    </div>
+
   </div>
 
-  <iframe name="hidden_iframe" id="hidden_iframe"></iframe>
+  <a href="./bienvenida.html" class="back-home">NOS VEMOS EN BARICHARA</a>
 
   <script>
-    let submitted = false;
-    const form = document.getElementById('rsvp-form');
-    const successBox = document.getElementById('success-box');
-    const iframe = document.getElementById('hidden_iframe');
+    // ⚠️ REEMPLAZA ESTA URL CON TU URL DE GOOGLE APPS SCRIPT
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby6mtzXB3YKtk5xwf-ZhHZpQgCJw8iQZ2iQh0DzLXZjMq-ju9sBISrwlfe-_f5fgDVLPA/exec";
 
-    function hideFormAndShowSuccess() {
-      form.style.display = 'none';
-      successBox.style.display = 'block';
+    let guestData = null;
+
+    const step1 = document.getElementById('step-1');
+    const step2 = document.getElementById('step-2');
+    const alertMsg = document.getElementById('alert-msg');
+    const formSearch = document.getElementById('form-search');
+    const formConfirm = document.getElementById('form-confirm');
+    const selectAttendees = document.getElementById('attendees-count');
+    const groupCompanions = document.getElementById('group-companions');
+
+    function showAlert(text, type = 'error') {
+      alertMsg.innerText = text;
+      alertMsg.className = `alert alert-${type}`;
+      alertMsg.style.display = 'block';
     }
 
-    // Comprobar si ya se envió la respuesta en este navegador
-    try {
-      if (localStorage.getItem('boda_asistencia_enviada') === 'true') {
-        hideFormAndShowSuccess();
+    function hideAlert() {
+      alertMsg.style.display = 'none';
+    }
+
+    // Paso 1: Buscar por teléfono
+    formSearch.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const phoneInput = document.getElementById('search-phone').value.trim();
+      const btnSearch = document.getElementById('btn-search');
+
+      if (!phoneInput) {
+        showAlert('Por favor ingresa tu número de teléfono.');
+        return;
       }
-    } catch(e) {
-      console.log('Navegador sin acceso a localStorage');
-    }
 
-    form.addEventListener('submit', function() {
-      submitted = true;
-      document.getElementById('btn-text').innerText = 'ENVIANDO...';
-      document.getElementById('btn-text').disabled = true;
+      btnSearch.innerText = 'BUSCANDO...';
+      btnSearch.disabled = true;
+
+      try {
+        const response = await fetch(`${SCRIPT_URL}?action=buscar&telefono=${encodeURIComponent(phoneInput)}`);
+        const data = await response.json();
+
+        if (data.encontrado) {
+          guestData = {
+            telefono: phoneInput,
+            nombre: data.nombre,
+            cupos: parseInt(data.cupos)
+          };
+
+          // Cargar datos en el Paso 2
+          document.getElementById('guest-name').innerText = `¡Hola, ${guestData.nombre}!`;
+          document.getElementById('guest-quota-text').innerText = 
+            guestData.cupos === 1 
+              ? 'Tienes 1 pase reservado para ti.' 
+              : `Tienes hasta ${guestData.cupos} pases reservados.`;
+
+          // Generar desplegable con el límite de cupos
+          selectAttendees.innerHTML = '';
+          for (let i = 1; i <= guestData.cupos; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.innerText = i === 1 ? '1 persona (Solo yo)' : `${i} personas`;
+            selectAttendees.appendChild(option);
+          }
+
+          // Mostrar/Ocultar campo acompañantes según la selección inicial
+          toggleCompanionsField();
+
+          step1.style.display = 'none';
+          step2.style.display = 'block';
+        } else {
+          showAlert('No encontramos este número en la lista de invitados. Verifica que sea el mismo número al que te enviamos la invitación o contáctanos directamente.');
+        }
+      } catch (err) {
+        console.error(err);
+        showAlert('Ocurrió un problema al consultar la lista. Inténtalo de nuevo.');
+      } finally {
+        btnSearch.innerText = 'BUSCAR INVITACIÓN';
+        btnSearch.disabled = false;
+      }
     });
 
-    iframe.addEventListener('load', function() {
-      if (submitted) {
-        try {
-          localStorage.setItem('boda_asistencia_enviada', 'true');
-        } catch(e) {}
-        
-        // Ocultar el formulario por completo e impedir cualquier nuevo intento
-        hideFormAndShowSuccess();
-        submitted = false;
+    // Escuchar cambio en desplegable para pedir nombres de acompañantes
+    selectAttendees.addEventListener('change', toggleCompanionsField);
+
+    function toggleCompanionsField() {
+      if (parseInt(selectAttendees.value) > 1) {
+        groupCompanions.style.display = 'block';
+        document.getElementById('companions-names').required = true;
+      } else {
+        groupCompanions.style.display = 'none';
+        document.getElementById('companions-names').required = false;
+      }
+    }
+
+    // Paso 2: Enviar confirmación
+    formConfirm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+
+      const btnConfirm = document.getElementById('btn-confirm');
+      btnConfirm.innerText = 'ENVIANDO...';
+      btnConfirm.disabled = true;
+
+      const payload = {
+        telefono: guestData.telefono,
+        nombre: guestData.nombre,
+        asistentes: selectAttendees.value,
+        acompanantes: groupCompanions.style.display !== 'none' ? document.getElementById('companions-names').value : '',
+        alergias: document.getElementById('dietary').value,
+        cancion: document.getElementById('song').value
+      };
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors', // Evita bloqueos de CORS con Apps Script
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        // Mostrar éxito
+        step2.innerHTML = `
+          <div style="text-align:center; padding: 20px 0;">
+            <h2 style="font-family:'Cormorant Garamond', serif; font-size:2.2rem; color:var(--verde-monograma); margin-bottom:15px;">
+              ¡Gracias por confirmar!
+            </h2>
+            <p style="font-size:0.95rem; color:#555; line-height:1.7;">
+              Hemos guardado tu confirmación para <strong>${payload.asistentes} persona(s)</strong>.
+            </p>
+            <p style="font-size:0.95rem; color:#555; margin-top:10px;">
+              ¡Nos vemos muy pronto en Barichara!
+            </p>
+          </div>
+        `;
+      } catch (err) {
+        console.error(err);
+        showAlert('Hubo un error al guardar tu respuesta. Por favor intenta de nuevo.');
+        btnConfirm.innerText = 'CONFIRMAR ASISTENCIA';
+        btnConfirm.disabled = false;
       }
     });
   </script>
